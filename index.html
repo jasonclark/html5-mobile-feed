@@ -1,0 +1,214 @@
+<!doctype html> 
+<html lang="en"> 
+<head>
+<meta charset="utf-8"/> 
+<title>Mobile Feed Widget</title> 
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="stylesheet" media="all" href="./meta/styles/master.css"/>
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1;"/>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>-->
+<script type="text/javascript">
+//global variables
+//var feed = 'http://www.blip.tv/posts/?user=msulibrary&pagelen=25&file_type=flv&skin=rss';
+//var feed = 'http://vimeo.com/msusfp/videos/rss';
+//var feed = 'http://api.flickr.com/services/feeds/photos_public.gne?id=8623220@N02&lang=en-us&format=rss_200';
+//var feedUrl = 'http://api.flickr.com/services/feeds/photos_public.gne?id=7901131@N06&lang=en-us&format=rss_200';
+var feedUrl = 'http://vimeo.com/msusfp/videos/rss';
+var siteUrl = 'http://www.lib.montana.edu';
+
+//function to create page views based on hash in url
+function setView(name) {
+	var name;
+	var i;
+	var views = document.getElementsByTagName("section");
+	if (!name) { name = "#home"; }
+		for (i=0; i<views.length; ++i) {
+			if (name === "#"+views[i].id) {
+				views[i].style.display = "block";
+			} else {
+				views[i].style.display = "none";
+			}
+		}
+	}
+	checkHash = (function() {
+		var hash;
+		return function() {
+			if (window.location.hash !== hash) {
+				hash = window.location.hash;
+				setView(hash);
+			}
+		}
+	})();
+	function init() {
+		setInterval(checkHash, 100);
+	}
+	//call our init function when the page loads
+	window.onload = init;
+</script>
+</head>
+	<body> 
+		<article> 
+			<header> 
+				<h1>Mobile Feed Widget</h1> 
+			</header>
+			<nav>
+				<ul id="nav">
+				<li><a href="./">Home</a></li>
+				<li><a href="#search">Search</a></li>
+				<li><a href="#browse">Browse</a></li>
+				</ul>
+			</nav>
+			<aside> 
+				<img src="./meta/img/reader.jpg" /> 
+			</aside> 
+			<div id="main">
+				<section id="home">	
+					<header> 
+						<h2>Latest items from our feed</h2> 
+					</header>  
+    				<ul id="listView"></ul>
+					<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+					<script type="text/javascript">
+					google.load("feeds", "1", {"callback" : showFeed});
+					function showFeed() {
+  						//var feed = new google.feeds.Feed("http://www.blip.tv/posts/?user=msulibrary&pagelen=25&file_type=flv&skin=rss");
+  						var feed = new google.feeds.Feed(feedUrl);
+  						feed.setNumEntries(6);
+  						feed.includeHistoricalEntries(); 
+  						feed.load(function(result) {
+							if (!result.error) {
+	  							var container = document.getElementById("listView");
+	  						for (var i = 0; i < result.feed.entries.length; i++) {
+								var entry = result.feed.entries[i];
+								var li = document.createElement("li");
+								li.innerHTML = '<h4><a href="' + entry.link + '">' + entry.title + '</a></h4>';
+								//li.innerHTML += '<p><a href="?url=' + entry.link + '#item">watch</p>';
+								li.innerHTML += '<p>' + entry.contentSnippet + '</p>';
+								//li.innerHTML += '<p>' + entry.content + '</p>';
+								container.appendChild(li);
+							}
+						} else {
+							var container = document.getElementById("listView");
+							container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
+						}
+  						});
+					}
+					</script>
+				</section>
+				<section id="search">
+					<header> 
+						<h2>Search the latest items...</h2> 
+					</header>
+					<form id="searchForm" action="http://search.yahoo.com/search" method="get">
+						<label for="q">Search:</label>
+						<input type="text" id="q" name="q" placeholder="Search..." />
+						<input type="submit" value="find" />
+					</form>					
+					<div id="results"></div>
+					<script type="text/javascript">
+					function query(term){ 
+						//var query = 'select * from feed where url="http://vimeo.com/album/1489958/rss" AND title like "%'+encodeURIComponent(term)+'%" OR url="http://vimeo.com/album/1489958/rss" AND description LIKE "%'+encodeURIComponent(term)+'%" | unique(field="title") | sort(field="title")';
+						var query = 'select * from feed where url="'+ feedUrl +'" AND title like "%'+encodeURIComponent(term)+'%" OR url="'+ feedUrl +'" AND description LIKE "%'+encodeURIComponent(term)+'%"';
+						//document.write(query);
+						
+						// start the URL by defining the API endpoint and encoding the query
+						var apiendpoint = 'http://query.yahooapis.com/v1/public/yql?q=';
+						var url = apiendpoint + encodeURIComponent(query);
+						
+						// diagnostics - remove if you don't need them
+						url += '&diagnostics=true';
+						
+						// format (json or xml)
+						url += '&format=json'; 
+						
+						// callback function (when format is json this triggers JSON-P-X output)
+						url += '&callback=searchFeed'; 
+						
+						// environment. this gives you access to the community tables
+						url += '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
+						
+						var s = document.createElement('script');
+						s.setAttribute('src',url);
+						document.getElementsByTagName('head')[0].appendChild(s);
+					}
+					function searchFeed(o){
+						if(o.query && o.query.results && o.query.results.item){
+							var res = o.query.results.item,
+							out = '<ol>',
+							i = 0,
+							entry = '';
+							for(i=0,j=res.length;i<j;i++){
+								entry = res[i];        
+								out += '<li><h4><a href="'+entry.link+'">'+entry.title+'</a></h4>'+entry.description+'</li>';
+							}
+							out += '</ol>';
+							out += '<p><a href="#search">new search</a><p>';
+							output.innerHTML = out;
+							} else {
+								output.innerHTML = '<p class="error">No search results. <a href="#search">Try another search</a>.</p>';
+							}
+					};
+					  
+					var output = document.createElement('div');
+					output.setAttribute('id','yqldata');
+					document.getElementById('results').appendChild(output);
+					  
+					var f = document.getElementsByTagName('form')[0];
+						f.onsubmit = function(){
+							output.innerHTML = 'Loading&hellip;';
+							query(document.getElementById('q').value);
+							return false;
+						};
+					</script>
+				</section>
+				<section id="browse">
+					<header> 
+						<h2>Browse the latest items...</h2> 
+					</header>
+    				<ul id="viewObjects"></ul>
+    				<p><a href="#home">home</a>
+					<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+					<script type="text/javascript">
+					google.load("feeds", "1", {"callback" : listObjects});
+					function listObjects() {
+  						var feed = new google.feeds.Feed(feedUrl);
+  						feed.setNumEntries(25);
+  						feed.includeHistoricalEntries(); 
+  						feed.load(function(result) {
+							if (!result.error) {
+	  							var container = document.getElementById("viewObjects");
+	  						for (var i = 0; i < result.feed.entries.length; i++) {
+								var entry = result.feed.entries[i];
+								var li = document.createElement("li");
+								li.innerHTML = '<h4>' + entry.title + '</h4>';
+								//li.innerHTML += '<p><a href="?url=' + entry.link + '#item">watch</p>';
+								//li.innerHTML += '<p>' + entry.contentSnippet + '</p>';
+								li.innerHTML += '<p>' + entry.content + '</p>';
+								container.appendChild(li);
+							}
+						} else {
+							var container = document.getElementById("viewObjects");
+							container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
+						}
+  						});
+					}
+					</script>
+				</section>
+			</div> 
+			<aside> 
+				<header> 
+					<h2>Related Items</h2> 
+				</header>
+				<ul> 
+					<li><a href="http://www.lib.montana.edu">Full library web site</a></li> 
+					<li><a href="http://www.lib.montana.edu/hours/">Library hours</a></li> 
+				</ul> 
+			</aside> 
+			<footer> 
+				<p>A demo by <a href="http://twitter.com/jaclark">@jaclark</a>.</p> 
+			</footer> 
+		</article>		
+	</body>	
+</html> 
