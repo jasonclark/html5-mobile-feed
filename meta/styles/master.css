@@ -1,8 +1,8 @@
-/*	Less Framework 3 by Joni Korpi http://lessframework.com	*/
+/* responsive web design css3 */
 
 /* resets */
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figure,figcaption,hgroup,menu,footer,header,nav,section,summary,time,mark,audio,video{border:0;margin:0;padding:0;}
-article,aside,canvas,figure,figure img,figcaption,hgroup,footer,header,nav,section,audio,video{display:block;} 
+article,aside,canvas,figure,figure img,figcaption,hgroup,footer,header,main,nav,section,audio,video{display:block;} 
 a img{border:0;}
 figure{position:relative;}
 figure img{width:100%;}
@@ -22,8 +22,22 @@ figure img{width:100%;}
 #nav li a:hover {background:#205c90;color:#fff;border-color:#205c90;}
 #nav li:nth-child(1) {padding-left:0;}
 div#main {min-height:260px;height:auto!important;height:260px;}
+label {display:none;}
+.settings label {display:block;}
+.settings input[type="text"] {width:75%;}
 footer {border-top:1px solid #D7D7D7;}
 footer p {margin:15px 0 0;}
+
+/* quick fade on target to attract user attention */       
+:target {-moz-animation: target-fade 3s 1;-webkit-animation: target-fade 3s 1;}
+@-webkit-keyframes target-fade {
+    0% { background-color: rgba(255,255,153,.5); color: rgba(255, 255, 153, .5);}
+    100% { background-color: rgba(0,0,0,0); }
+}
+@-moz-keyframes target-fade {
+    0% { background-color: rgba(255,255,153,.5); color: rgba(255, 255, 153, .5);}
+    100% { background-color: rgba(0,0,0,0); }
+}
 
 /*	Default 8-column layout
 	60 px columns, 24 px gutters, 60 px margins, 768 px total
@@ -31,13 +45,13 @@ footer p {margin:15px 0 0;}
 	1     2      3      4      5      6      7      8     
 	60px  144px  228px  312px  396px  480px  564px  648px	*/
 
-body {background:#e8e8e8;width:648px;-webkit-tap-highlight-color:#ff0;padding:84px 60px 0;}
-article > div {float:left;width:348px;margin-right:24px;margin-bottom:24px;background:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;padding:24px;}
-article > aside {float:right;width:228px;margin-bottom:24px;}
-article > aside:first-of-type {margin-bottom:0;}
-article > aside img {width:218px;background-color:#FFF;border:1px solid #DDD;-webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.2);-moz-box-shadow:2px 2px 2px rgba(0,0,0,0.2);padding:4px;} 
-article > footer {clear:both;float:none;width:100%;margin-top:24px;}
-article > header > h1 {font-size:42px;line-height:48px;}
+body {background:#e8e8e8;width:648px;-webkit-tap-highlight-color:#ff0;padding:10px 60px 0;}
+#doc > div {float:left;width:348px;margin-right:24px;margin-bottom:24px;background:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;padding:24px;}
+#doc > aside {float:right;width:228px;margin-bottom:24px;}
+#doc > aside:first-of-type {margin-bottom:0;}
+#doc > aside img {width:218px;background-color:#FFF;border:1px solid #DDD;-webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.2);-moz-box-shadow:2px 2px 2px rgba(0,0,0,0.2);padding:4px;} 
+#doc > footer {clear:both;float:none;width:100%;margin-top:24px;}
+#doc > header > h1 {font-size:42px;line-height:48px;}
 h2,aside > header > h1 {font-size:16px;line-height:24px;}
 h1,h2,h3,h4,h5,h6 {font-family:Helvetica, Arial, san-serif;-moz-text-shadow:#FF0 0 5px 5px;-webkit-text-shadow:#FFF 0 1px;text-shadow:rgba(255,255,255,1) 1px 1px 0;}
 aside,div {margin-top:24px;}
@@ -56,10 +70,10 @@ img::selection,img::-moz-selection {background:transparent;}
 	60px  144px  228px  312px  396px  480px  564px  648px  732px  816px  900px  984px  1068px	*/
 
 @media only screen and (min-width: 1212px) {
-body {width:1068px;position:relative;padding:96px 72px 0;}
-article > div {width:600px;margin-bottom:24px;}
-article > aside {width:396px;}
-article > aside img {width:386px;}
+body {width:1068px;position:relative;padding:10px 72px 0;}
+#doc > div {width:600px;margin-bottom:24px;}
+#doc > aside {width:396px;}
+#doc > aside img {width:386px;}
 }	
 
 /*	5-column layout
@@ -69,11 +83,11 @@ article > aside img {width:386px;}
 	60px  144px  228px  312px  396px	*/
 
 @media only screen and (max-width: 767px) and (min-width: 480px) {
-body {width:396px;-webkit-text-size-adjust:100%;padding:60px 42px 0;}
-article > div,article > footer,article > aside {float:none;clear:none;}
-article > div {width:348px;}
-article > aside img {width:386px;}
-article > header > h1,#nav {text-align:center;}	
+body {width:396px;-webkit-text-size-adjust:100%;padding:10px 42px 0;}
+#doc > div,#doc > footer,#doc > aside {float:none;clear:none;}
+#doc > div {width:348px;}
+#doc > aside img {width:386px;}
+#doc > header > h1,#nav {text-align:center;}	
 }
 
 /*	3-column layout
@@ -84,11 +98,11 @@ article > header > h1,#nav {text-align:center;}
 
 @media only screen and (max-width: 479px) {
 body {width:290px;-webkit-text-size-adjust:100%;font-size:13px;line-height:18px;margin:0 auto;padding:10px;}
-article > div {width:255px;margin-bottom:18px;padding:18px;}
-article > header > h1 {font-size:26px;line-height:36px;text-align:center;}
-article > div > header > h2 {font-size:16px;line-height:24px;}
-article > div,article > footer,article > aside {float:none;clear:none;}
-article > aside img {display:none;}
+#doc > div {width:255px;margin-bottom:18px;padding:18px;}
+#doc > header > h1 {font-size:26px;line-height:36px;text-align:center;}
+#doc > div > header > h2 {font-size:16px;line-height:24px;}
+#doc > div,#doc > footer,#doc > aside {float:none;clear:none;}
+#doc > aside img {display:none;}
 p,section,aside,ul {margin-top:18px;}
 #nav{text-align:center;}
 }
