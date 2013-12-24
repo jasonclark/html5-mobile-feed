@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head>
 <meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Mobile Feed App</title> 
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -51,12 +51,12 @@ function init() {
 window.onload = init;
 </script>
 </head>
-	<body>
+	<body role="document">
 	<div id="doc" itemscope itemtype="http://schema.org/ItemPage"> 
-        <header itemprop="name"> 
+        <header role="banner" aria-labelledby="heading" itemprop="name"> 
             <h1>Mobile Feed App</h1> 
         </header>
-        <nav>
+        <nav role="navigation">
             <ul id="nav">
             <li><a href="#home">Home</a></li>
             <li><a href="#search">Search</a></li>
@@ -64,13 +64,15 @@ window.onload = init;
             <li><a href="#set">&#9776;</a></li>
             </ul>
         </nav>
-        <aside> 
-            <img itemprop="primaryImageOfPage" src="./meta/img/reader.jpg" /> 
-        </aside>
-         
+        <aside role="complementary">
+			<figure>
+            <img itemprop="primaryImageOfPage" src="./meta/img/reader.jpg" alt="statue of a reader" /> 
+			<figcaption>statue of a reader</figcaption>
+			</figure>
+		</aside>      
         <div id="main">
-        <main>
-            <section id="home">	
+        <main role="main">
+            <section id="home" role="region" aria-labelledby="home">	
                 <header> 
                     <h2 itemprop="about headline">Latest items from our feed</h2> 
                 </header>  
@@ -99,11 +101,11 @@ window.onload = init;
                 }
                 </script>
             </section>
-            <section id="search">
+            <section id="search" role="region" aria-labelledby="search">
                 <header> 
                     <h2>Search the latest items...</h2> 
                 </header>
-                <form id="searchForm" action="http://search.yahoo.com/search" method="get">
+                <form id="searchForm" role="search" action="http://search.yahoo.com/search" method="get">
                     <label for="q">Search:</label>
                     <input type="search" id="q" name="q" placeholder="Search..." autofocus />
                     <input type="submit" value="find" />
@@ -164,7 +166,7 @@ window.onload = init;
                     };
                 </script>
             </section>
-            <section id="browse">
+            <section id="browse" role="region" aria-labelledby="browse">
                 <header> 
                     <h2>Browse the latest items...</h2> 
                 </header>
@@ -194,11 +196,11 @@ window.onload = init;
                 }
                 </script>
             </section>
-            <section id="set">
+            <section id="set" role="region" aria-labelledby="set">
             	<header> 
             		<h2>App Settings</h2> 
                 </header>
-                <form class="settings" id="settings" action="">
+                <form class="settings" id="settings" action="#set">
                 <label for="feed">Set feed URL for app</label>
 				<input type="text" name="feed" id="feed" value="" />
       			<label for="site">Set site URL for app</label>
@@ -244,7 +246,7 @@ window.onload = init;
             </section>
         </main>
         </div><!-- end #main -->
-        <aside> 
+        <aside role="complementary"> 
             <header> 
                 <h2>Related Items</h2> 
             </header>
@@ -253,7 +255,7 @@ window.onload = init;
                 <li><a itemprop="relatedLink" href="http://www.lib.montana.edu/hours/" rel="external">Library hours</a></li> 
             </ul> 
         </aside> 
-        <footer> 
+        <footer role="contentinfo"> 
             <p>demo by <a itemprop="author creator person" href="http://twitter.com/jaclark">@jaclark</a> | <a itemprop="relatedLink" href="../html5-mobile-feed.zip">get code</a> | &copy; <span itemprop="publisher sourceOrganization">MSU Library</span></p> 
         </footer>
     </div><!-- end #doc -->
