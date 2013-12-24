@@ -6,6 +6,7 @@ article,aside,canvas,figure,figure img,figcaption,hgroup,footer,header,main,nav,
 a img{border:0;}
 figure{position:relative;}
 figure img{width:100%;}
+figcaption{display:none;}
 
 /* typography presets */
 .gigantic{font-size:110px;line-height:120px;letter-spacing:-2px;}
