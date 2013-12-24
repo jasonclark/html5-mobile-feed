@@ -51,13 +51,13 @@ function init() {
 window.onload = init;
 </script>
 </head>
-	<body role="document">
-	<div id="doc" itemscope itemtype="http://schema.org/ItemPage"> 
-        <header role="banner" itemprop="name"> 
+<body role="document" vocab="http://schema.org/" typeof="WebPage">
+	<div id="doc"> 
+        <header role="banner" property="name description"> 
             <h1>Mobile Feed App</h1> 
         </header>
         <nav role="navigation">
-            <ul id="nav">
+            <ul id="nav" property="breadcrumb">
             <li><a href="#home">Home</a></li>
             <li><a href="#search">Search</a></li>
             <li><a href="#browse">Browse</a></li>
@@ -66,7 +66,7 @@ window.onload = init;
         </nav>
         <aside role="complementary">
 			<figure>
-            <img itemprop="primaryImageOfPage" src="./meta/img/reader.jpg" alt="statue of a reader" /> 
+			<img property="primaryImageOfPage" src="./meta/img/reader.jpg" alt="statue of a reader" /> 
 			<figcaption>statue of a reader</figcaption>
 			</figure>
 		</aside>      
@@ -74,7 +74,7 @@ window.onload = init;
         <main role="main">
             <section id="home" role="region" aria-labelledby="home">	
                 <header> 
-                    <h2 itemprop="about headline">Latest items from our feed</h2> 
+                    <h2 property="headline">Latest items from our feed</h2> 
                 </header>  
                 <ul id="listView"></ul>
                 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -103,7 +103,7 @@ window.onload = init;
             </section>
             <section id="search" role="region" aria-labelledby="search">
                 <header> 
-                    <h2>Search the latest items...</h2> 
+                    <h2 property="alternativeHeadline">Search the latest items...</h2> 
                 </header>
                 <form id="searchForm" role="search" action="http://search.yahoo.com/search" method="get">
                     <label for="q">Search:</label>
@@ -168,7 +168,7 @@ window.onload = init;
             </section>
             <section id="browse" role="region" aria-labelledby="browse">
                 <header> 
-                    <h2>Browse the latest items...</h2> 
+                    <h2 property="alternativeHeadline">Browse the latest items...</h2> 
                 </header>
                 <ul id="viewObjects"></ul>
                 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -198,7 +198,7 @@ window.onload = init;
             </section>
             <section id="set" role="region" aria-labelledby="set">
             	<header> 
-            		<h2>App Settings</h2> 
+            		<h2 property="alternativeHeadline">App Settings</h2> 
                 </header>
                 <form class="settings" id="settings" action="#set">
                 <label for="feed">Set feed URL for app</label>
@@ -251,13 +251,13 @@ window.onload = init;
                 <h2>Related Items</h2> 
             </header>
             <ul id="links"> 
-                <li><a itemprop="url" href="http://www.lib.montana.edu" rel="external">Full library web site</a></li> 
-                <li><a itemprop="relatedLink" href="http://www.lib.montana.edu/hours/" rel="external">Library hours</a></li> 
+                <li><a property="url" href="http://www.lib.montana.edu" rel="external">Full library web site</a></li> 
+                <li><a property="relatedLink" href="http://www.lib.montana.edu/hours/" rel="external">Library hours</a></li> 
             </ul> 
         </aside> 
         <footer role="contentinfo"> 
-            <p>demo by <a itemprop="author creator person" href="http://twitter.com/jaclark">@jaclark</a> | <a itemprop="relatedLink" href="../html5-mobile-feed.zip">get code</a> | &copy; <span itemprop="publisher sourceOrganization">MSU Library</span></p> 
+            <p>demo by <a property="author creator person" href="http://twitter.com/jaclark">@jaclark</a> | <a property="relatedLink" href="../html5-mobile-feed.zip">get code</a> | &copy; <span property="publisher sourceOrganization">MSU Library</span></p> 
         </footer>
     </div><!-- end #doc -->
-    </body>	
+</body>	
 </html>
