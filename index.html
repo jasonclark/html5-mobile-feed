@@ -8,7 +8,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <link rel="stylesheet" media="all" href="./meta/styles/master.css"/>
-<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1;"/>
+<meta name="viewport" content="width=device-width; initial-scale=1;"/>
 <script type="text/javascript">
 //set global variables, use html5 localStorage if available
 if (typeof(Storage) !== 'undefined') {
@@ -66,8 +66,10 @@ window.onload = init;
         </nav>
         <aside> 
             <img itemprop="primaryImageOfPage" src="./meta/img/reader.jpg" /> 
-        </aside> 
+        </aside>
+         
         <div id="main">
+        <main>
             <section id="home">	
                 <header> 
                     <h2 itemprop="about headline">Latest items from our feed</h2> 
@@ -240,6 +242,7 @@ window.onload = init;
     			
     			</script>
             </section>
+        </main>
         </div><!-- end #main -->
         <aside> 
             <header> 
