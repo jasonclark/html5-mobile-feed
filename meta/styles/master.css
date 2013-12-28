@@ -1,6 +1,6 @@
-/* html5 mobile feed app and responsive web design css3 */
+/*html5 & css3 (responsive web design) mobile feed app*/
 
-/* resets */
+/*resets*/
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figure,figcaption,hgroup,menu,footer,header,nav,section,summary,time,mark,audio,video{border:0;margin:0;padding:0;}
 article,aside,canvas,figure,figure img,figcaption,hgroup,footer,header,main,nav,section,audio,video{display:block;} 
 a img{border:0;}
@@ -8,15 +8,13 @@ figure{position:relative;}
 figure img{width:100%;}
 figcaption{display:none;}
 
-/* typography presets */
-.gigantic{font-size:110px;line-height:120px;letter-spacing:-2px;}
-.huge,h1{font-size:68px;line-height:72px;letter-spacing:-1px;}
-.large,h2{font-size:42px;line-height:48px;}
-.big,h3{font-size:26px;line-height:36px;}
-.normal,body{font:16px/24px Helvetica, Arial, sans-serif;}
-.small{font-size:13px;line-height:18px;}
+/*typography presets*/
+body{font:normal 100%/1.5 Helvetica, Arial, sans-serif;}
+h1{font-size:68px;line-height:72px;letter-spacing:-1px;}
+h2{font-size:42px;line-height:48px;}
+h3{font-size:26px;line-height:36px;}
 
-/* global styles */
+/*global styles*/
 #nav {list-style-type:none;margin:5px auto 0 auto;}
 #nav li {display:inline;padding:0 5px;}
 #nav li a {background-color:#C0C0C0;color:#000;padding:3px 10px;text-decoration:none;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
@@ -29,7 +27,7 @@ label {display:none;}
 footer {border-top:1px solid #D7D7D7;}
 footer p {margin:15px 0 0;}
 
-/* quick fade on target to attract user attention */       
+/*quick fade on target to attract user attention*/       
 :target {-moz-animation: target-fade 3s 1;-webkit-animation: target-fade 3s 1;}
 @-webkit-keyframes target-fade {
     0% { background-color: rgba(255,255,153,.5); color: rgba(255, 255, 153, .5);}
@@ -40,12 +38,7 @@ footer p {margin:15px 0 0;}
     100% { background-color: rgba(0,0,0,0); }
 }
 
-/*	Default 8-column layout
-	60 px columns, 24 px gutters, 60 px margins, 768 px total
-	---------------------------------------------------------
-	1     2      3      4      5      6      7      8     
-	60px  144px  228px  312px  396px  480px  564px  648px	*/
-
+/*laptop & desktop screen view [default]: target of 768px to 1211px, em conversions based on 16px base font size set in body declaration*/
 body {background:#e8e8e8;width:648px;-webkit-tap-highlight-color:#ff0;padding:10px 60px 0;}
 #doc > div {float:left;width:348px;margin-right:24px;margin-bottom:24px;background:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;padding:24px;}
 #doc > aside {float:right;width:228px;margin-bottom:24px;}
@@ -64,26 +57,18 @@ p {margin:5px 0;}
 ::selection,::-moz-selection {background:#ff0;}
 img::selection,img::-moz-selection {background:transparent;}
 
-/*	13-column layout
-	60 px columns, 24 px gutters, 72 px margins, 1212 px total (extra space for scrollbars)
-	---------------------------------------------------------------------------------------
-	1     2      3      4      5      6      7      8      9      10     11     12     13
-	60px  144px  228px  312px  396px  480px  564px  648px  732px  816px  900px  984px  1068px	*/
-
-@media only screen and (min-width: 1212px) {
+/*large screen view: target of 1212px, em conversions based on 16px base font size set in body declaration*/
+/*@media only screen and (min-width: 1212px) {*/
+@media only screen and (min-width: 75.750em) {
 body {width:1068px;position:relative;padding:10px 72px 0;}
 #doc > div {width:600px;margin-bottom:24px;}
 #doc > aside {width:396px;}
 #doc > aside img {width:386px;}
-}	
+}
 
-/*	5-column layout
-	60 px columns, 24 px gutters, 42 px margins, 480 px total
-	---------------------------------------------------------
-	1     2      3      4      5
-	60px  144px  228px  312px  396px	*/
-
-@media only screen and (max-width: 767px) and (min-width: 480px) {
+/*small tablet & large phone screen view: target of 767px to 480px, em conversions based on 16px base font size set in body declaration*/
+/*@media only screen and (max-width: 767px) and (min-width: 480px) {*/
+@media only screen and (max-width: 47.938em) and (min-width: 30.000em) {
 body {width:396px;-webkit-text-size-adjust:100%;padding:10px 42px 0;}
 #doc > div,#doc > footer,#doc > aside {float:none;clear:none;}
 #doc > div {width:348px;}
@@ -91,13 +76,9 @@ body {width:396px;-webkit-text-size-adjust:100%;padding:10px 42px 0;}
 #doc > header > h1,#nav {text-align:center;}	
 }
 
-/*	3-column layout
-	60 px columns, 24 px gutters, 46 px margins, 320 px total
-	---------------------------------------------------------
-	1     2      3
-	60px  144px  228px	*/
-
-@media only screen and (max-width: 479px) {
+/*phone screen view: target of 320px, em conversions based on 16px base font size set in body declaration*/
+/*@media only screen and (max-width: 479px) {*/
+@media only screen and (max-width: 29.938em) {
 body {width:290px;-webkit-text-size-adjust:100%;font-size:13px;line-height:18px;margin:0 auto;padding:10px;}
 #doc > div {width:255px;margin-bottom:18px;padding:18px;}
 #doc > header > h1 {font-size:26px;line-height:36px;text-align:center;}
