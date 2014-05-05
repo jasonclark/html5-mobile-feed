@@ -9,12 +9,13 @@ figure img{width:100%;}
 figcaption{display:none;}
 
 /*typography presets*/
-body{font:normal 100%/1.5 Helvetica, Arial, sans-serif;}
+body{color:#39444a;font:normal 100%/1.5 'Open Sans',Helvetica,Arial,sans-serif;}
 h1{font-size:68px;line-height:72px;letter-spacing:-1px;}
 h2{font-size:42px;line-height:48px;}
 h3{font-size:26px;line-height:36px;}
 
 /*global styles*/
+a {color:#39444a;}
 #nav {list-style-type:none;margin:5px auto 0 auto;}
 #nav li {display:inline;padding:0 5px;}
 #nav li a {background-color:#C0C0C0;color:#000;padding:3px 10px;text-decoration:none;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
@@ -24,7 +25,7 @@ div#main {min-height:260px;height:auto!important;height:260px;}
 label {display:none;}
 .settings label {display:block;}
 .settings input[type="text"] {width:75%;}
-footer {border-top:1px solid #D7D7D7;}
+footer {border-top:1px solid #9fb3bd;}
 footer p {margin:15px 0 0;}
 
 /*quick fade on target to attract user attention*/       
@@ -39,7 +40,7 @@ footer p {margin:15px 0 0;}
 }
 
 /*laptop & desktop screen view [default]: target of 768px to 1211px, em conversions based on 16px base font size set in body declaration*/
-body {background:#e8e8e8;width:648px;-webkit-tap-highlight-color:#ff0;padding:10px 60px 0;}
+body {background:#e4e8e9 url("../img/bg-texture-greyboard.jpg") repeat left top;width:648px;-webkit-tap-highlight-color:#ff0;padding:10px 60px 0;}
 #doc > div {float:left;width:348px;margin-right:24px;margin-bottom:24px;background:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;padding:24px;}
 #doc > aside {float:right;width:228px;margin-bottom:24px;}
 #doc > aside:first-of-type {margin-bottom:0;}
@@ -47,7 +48,7 @@ body {background:#e8e8e8;width:648px;-webkit-tap-highlight-color:#ff0;padding:10
 #doc > footer {clear:both;float:none;width:100%;margin-top:24px;}
 #doc > header > h1 {font-size:42px;line-height:48px;}
 h2,aside > header > h1 {font-size:16px;line-height:24px;}
-h1,h2,h3,h4,h5,h6 {font-family:Helvetica, Arial, san-serif;-moz-text-shadow:#FF0 0 5px 5px;-webkit-text-shadow:#FFF 0 1px;text-shadow:rgba(255,255,255,1) 1px 1px 0;}
+h1,h2,h3,h4,h5,h6 {-moz-text-shadow:#FF0 0 5px 5px;-webkit-text-shadow:#FFF 0 1px;text-shadow:rgba(255,255,255,1) 1px 1px 0;}
 aside,div {margin-top:24px;}
 section {margin-top:0;}
 section > p:first-child,div > p:first-child {margin:0;}
@@ -71,7 +72,8 @@ body {width:1068px;position:relative;padding:10px 72px 0;}
 @media only screen and (max-width: 47.938em) and (min-width: 30.000em) {
 body {width:396px;-webkit-text-size-adjust:100%;padding:10px 42px 0;}
 #doc > div,#doc > footer,#doc > aside {float:none;clear:none;}
-#doc > div {width:348px;}
+#doc {margin-top:10px;}
+#doc > div {width:348px;margin-top:15px;}
 #doc > aside img {width:386px;}
 #doc > header > h1,#nav {text-align:center;}	
 }
@@ -80,11 +82,12 @@ body {width:396px;-webkit-text-size-adjust:100%;padding:10px 42px 0;}
 /*@media only screen and (max-width: 479px) {*/
 @media only screen and (max-width: 29.938em) {
 body {width:290px;-webkit-text-size-adjust:100%;font-size:13px;line-height:18px;margin:0 auto;padding:10px;}
+#doc {margin-top:0;}
 #doc > div {width:255px;margin-bottom:18px;padding:18px;}
 #doc > header > h1 {font-size:26px;line-height:36px;text-align:center;}
 #doc > div > header > h2 {font-size:16px;line-height:24px;}
 #doc > div,#doc > footer,#doc > aside {float:none;clear:none;}
 #doc > aside img {display:none;}
-p,section,aside,ul {margin-top:18px;}
+p,section,aside,ul {margin-top:18px;} 
 #nav{text-align:center;}
 }
