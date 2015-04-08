@@ -8,13 +8,8 @@ A single page app that applies HTML5 markup, CSS3, and Javascript APIs to create
 Contact me if you have questions or are interested in developing the project.
 
 Jason A. Clark
-
 Associate Professor
-
 Head, Library Informatics & Computing
-
 Montana State University (MSU) Library
-
 www.jasonclark.info
-
 [@jaclark](https://twitter.com/jaclark)
