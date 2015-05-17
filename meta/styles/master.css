@@ -2,7 +2,7 @@
 
 /*resets*/
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figure,figcaption,hgroup,menu,footer,header,nav,section,summary,time,mark,audio,video{border:0;margin:0;padding:0;}
-article,aside,canvas,figure,figure img,figcaption,hgroup,footer,header,main,nav,section,audio,video{display:block;} 
+article,aside,canvas,figure,figure img,figcaption,hgroup,footer,header,main,nav,section,audio,video{display:block;}
 a img{border:0;}
 figure{position:relative;}
 figure img{width:100%;}
@@ -21,6 +21,7 @@ a {color:#39444a;}
 #nav li a {background-color:#C0C0C0;color:#000;padding:3px 10px;text-decoration:none;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 #nav li a:hover {background:#205c90;color:#fff;border-color:#205c90;}
 #nav li:nth-child(1) {padding-left:0;}
+.settings-icon:before {content: "\2699\ ";font-size:1.2em}
 div#main {min-height:260px;height:auto!important;height:260px;}
 label {display:none;}
 .settings label {display:block;}
@@ -28,7 +29,7 @@ label {display:none;}
 footer {border-top:1px solid #9fb3bd;}
 footer p {margin:15px 0 0;}
 
-/*quick fade on target to attract user attention*/       
+/*quick fade on target to attract user attention*/
 :target {-moz-animation: target-fade 3s 1;-webkit-animation: target-fade 3s 1;}
 @-webkit-keyframes target-fade {
     0% { background-color: rgba(255,255,153,.5); color: rgba(255, 255, 153, .5);}
@@ -44,7 +45,7 @@ body {background:#e4e8e9 url("../img/bg-texture-greyboard.jpg") repeat left top;
 #doc > div {float:left;width:348px;margin-right:24px;margin-bottom:24px;background:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;padding:24px;}
 #doc > aside {float:right;width:228px;margin-bottom:24px;}
 #doc > aside:first-of-type {margin-bottom:0;}
-#doc > aside img {width:218px;background-color:#FFF;border:1px solid #DDD;-webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.2);-moz-box-shadow:2px 2px 2px rgba(0,0,0,0.2);padding:4px;} 
+#doc > aside img {width:218px;background-color:#FFF;border:1px solid #DDD;-webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.2);-moz-box-shadow:2px 2px 2px rgba(0,0,0,0.2);padding:4px;}
 #doc > footer {clear:both;float:none;width:100%;margin-top:24px;}
 #doc > header > h1 {font-size:42px;line-height:48px;}
 h2,aside > header > h1 {font-size:16px;line-height:24px;}
@@ -75,7 +76,7 @@ body {width:396px;-webkit-text-size-adjust:100%;padding:10px 42px 0;}
 #doc {margin-top:10px;}
 #doc > div {width:348px;margin-top:15px;}
 #doc > aside img {width:386px;}
-#doc > header > h1,#nav {text-align:center;}	
+#doc > header > h1,#nav {text-align:center;}
 }
 
 /*phone screen view: target of 320px, em conversions based on 16px base font size set in body declaration*/
@@ -88,6 +89,6 @@ body {width:290px;-webkit-text-size-adjust:100%;font-size:13px;line-height:18px;
 #doc > div > header > h2 {font-size:16px;line-height:24px;}
 #doc > div,#doc > footer,#doc > aside {float:none;clear:none;}
 #doc > aside img {display:none;}
-p,section,aside,ul {margin-top:18px;} 
+p,section,aside,ul {margin-top:18px;}
 #nav{text-align:center;}
 }
