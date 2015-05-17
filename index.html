@@ -61,7 +61,7 @@ window.onload = init;
             <li><a href="#home">Home</a></li>
             <li><a href="#search">Search</a></li>
             <li><a href="#browse">Browse</a></li>
-            <li><a href="#set">&#9776;</a></li>
+            <li><a class="settings-icon" href="#set">Set</a></li>
             </ul>
         </nav>
         <aside role="complementary">
@@ -199,18 +199,18 @@ window.onload = init;
             <section id="set" role="region" aria-labelledby="set">
             	<header>
             		<h2 property="alternativeHeadline">App Settings</h2>
-                </header>
+              </header>
                 <form class="settings" id="settings" action="#set">
                 <label for="feed">Set feed URL for app</label>
-				<input type="text" name="feed" id="feed" value="" />
-      			<label for="site">Set site URL for app</label>
-      			<input type="text" name="site" id="site" value="" />
-    			</form>
-    			<p id="message"></p>
-    			<input type="submit" name="save" id="save" value="save" />
-    			<input type="submit" name="clear" id="clear" value="clear" />
-    			<script type="text/javascript">
-    			//set variables for app settings routine
+								<input type="text" name="feed" id="feed" value="" />
+								<label for="site">Set site URL for app</label>
+								<input type="text" name="site" id="site" value="" />
+								</form>
+    						<p id="message"></p>
+    						<input type="submit" name="save" id="save" value="save" />
+    						<input type="submit" name="clear" id="clear" value="clear" />
+    		<script type="text/javascript">
+    		//set variables for app settings routine
 				var feed = document.getElementById("feed");
 				var site = document.getElementById("site");
 				var msg = document.getElementById("message");
@@ -241,8 +241,7 @@ window.onload = init;
 				//create click events for each form button
 				document.getElementById("save").onclick = function() { saveData(); return false;};
 				document.getElementById("clear").onclick = function() { clearData(); return false;};
-
-    			</script>
+    		</script>
             </section>
         </main>
         </div><!-- end #main -->
