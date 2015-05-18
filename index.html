@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" vocab="http://schema.org/" typeof="CreativeWork">
 <head>
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Mobile Feed App</title>
+<title property="name">Mobile Feed App</title>
+<meta name="description" property="description" content="A single page app using HTML5 markup, CSS3, & Javascript APIs to create a mobile feed search/display as a teaching tool for HTML5 courses."/>
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -51,7 +52,7 @@ function init() {
 window.onload = init;
 </script>
 </head>
-<body role="document" vocab="http://schema.org/" typeof="WebPage">
+<body role="document" typeof="WebPage">
 	<div id="doc">
         <header role="banner" property="name description">
             <h1>Mobile Feed App</h1>
@@ -65,11 +66,11 @@ window.onload = init;
             </ul>
         </nav>
         <aside role="complementary">
-			<figure>
-			<img property="primaryImageOfPage" src="./meta/img/reader.jpg" alt="statue of a reader" />
-			<figcaption>statue of a reader</figcaption>
-			</figure>
-		</aside>
+					<figure>
+					<img property="primaryImageOfPage" src="./meta/img/reader.jpg" alt="statue of a reader" />
+					<figcaption>statue of a reader</figcaption>
+					</figure>
+				</aside>
         <div id="main">
         <main role="main">
             <section id="home" role="region" aria-labelledby="home">
@@ -250,12 +251,12 @@ window.onload = init;
                 <h2>Related Items</h2>
             </header>
             <ul id="links">
-                <li><a property="url" href="http://www.lib.montana.edu" rel="external">Full library web site</a></li>
+                <li><a property="relatedLink" href="http://www.lib.montana.edu" rel="external">Full library web site</a></li>
                 <li><a property="relatedLink" href="http://www.lib.montana.edu/hours/" rel="external">Library hours</a></li>
             </ul>
         </aside>
         <footer role="contentinfo">
-            <p>demo by <a property="author creator person" href="http://twitter.com/jaclark">@jaclark</a> | <a property="relatedLink" href="../html5-mobile-feed.zip">get code</a> | &copy; <span property="publisher sourceOrganization">MSU Library</span></p>
+            <p>demo by <a property="author creator publisher" href="http://twitter.com/jaclark">@jaclark</a> | <a property="relatedLink" href="../html5-mobile-feed.zip">get code</a> | &copy; <span property="publisher sourceOrganization">MSU Library</span></p>
         </footer>
     </div><!-- end #doc -->
 </body>
