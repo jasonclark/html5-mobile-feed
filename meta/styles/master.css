@@ -21,10 +21,10 @@ a {color:#39444a;}
 #nav li a {background-color:#C0C0C0;color:#000;padding:3px 10px;text-decoration:none;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 #nav li a:hover {background:#205c90;color:#fff;border-color:#205c90;}
 #nav li:nth-child(1) {padding-left:0;}
+.hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
 .settings-icon:before {content: "\2699\ ";font-size:1.2em}
 div#main {min-height:260px;height:auto!important;height:260px;}
 label {display:none;}
-.settings label {display:block;}
 .settings input[type="text"] {width:75%;}
 footer {border-top:1px solid #9fb3bd;}
 footer p {margin:15px 0 0;}
