@@ -61,8 +61,10 @@ h1,h2,h3,h4,h5,h6 {-moz-text-shadow:#FF0 0 5px 5px;-webkit-text-shadow:#FFF 0 1p
 aside,div {margin-top:24px;}
 section {margin-top:0;}
 section > p:first-child,div > p:first-child {margin:0;}
-ul {list-style-type:square;list-style-position:outside;margin:24px 0 0 16px;}
-ol {list-style-type:number;list-style-position:outside;margin:24px 0 0 16px;}
+ul {list-style-type:square;list-style-position:outside;margin:14px 0 0 16px;}
+ol {list-style-type:number;list-style-position:outside;margin:14px 0 0 16px;}
+#links li:nth-child(n+1) {margin-bottom:8px;}
+#links li:last-child {margin-bottom:0;}
 p {margin:5px 0;}
 ::selection,::-moz-selection {background:#ff0;}
 img::selection,img::-moz-selection {background:transparent;}
