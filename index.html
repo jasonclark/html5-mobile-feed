@@ -147,7 +147,7 @@ window.onload = init;
                             out += '<li><h2><a href="'+entry.link+'">'+entry.title+'</a></h2><p>'+entry.description+'</p></li>';
                         }
                         out += '</ol>';
-                        out += '<p><a href="#search">new search</a><p>';
+                        out += '<p><a href="#search">&#10010; new search</a><p>';
                         output.innerHTML = out;
                         } else {
                             output.innerHTML = '<p class="error">No search results. <a href="#search">Try another search</a>.</p>';
@@ -205,10 +205,10 @@ window.onload = init;
 								<input type="text" name="feed" id="feed" value="" />
 								<label for="site">Set site URL for app</label>
 								<input type="text" name="site" id="site" value="" />
-								</form>
     						<p id="message"></p>
     						<input type="submit" name="save" id="save" value="save" />
     						<input type="submit" name="clear" id="clear" value="clear" />
+								</form>
     		<script type="text/javascript">
     		//set variables for app settings routine
 				var feed = document.getElementById("feed");
