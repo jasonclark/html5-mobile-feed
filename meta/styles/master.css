@@ -9,7 +9,7 @@ figure img{width:100%;}
 figcaption{display:none;}
 
 /*typography presets*/
-body{color:#39444a;font:normal 100%/1.5 'Open Sans',Helvetica,Arial,sans-serif;}
+html{color:#39444a;font:normal 100%/1.5 'Open Sans',Helvetica,Arial,sans-serif;}
 h1{font-size:68px;line-height:72px;letter-spacing:-1px;}
 h2{font-size:42px;line-height:48px;}
 h3{font-size:26px;line-height:36px;}
@@ -18,7 +18,7 @@ h3{font-size:26px;line-height:36px;}
 a {color:#39444a;}
 #nav {list-style-type:none;margin:5px auto 0 auto;}
 #nav li {display:inline;padding:0 5px;}
-#nav li a {background-color:#C0C0C0;color:#000;padding:5px 10px;text-decoration:none;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+#nav li a {background-color:#C0C0C0;color:#000;padding:5px 10px;text-decoration:none;border-radius:3px;}
 #nav li a:hover {background:#205c90;color:#fff;border-color:#205c90;}
 #nav li:nth-child(1) {padding-left:0;}
 .hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
@@ -50,7 +50,7 @@ input[type="text"]:focus, input[type="search"]:focus {border-color:#66afe9;outli
 
 /*laptop & desktop screen view [default]: target of 768px to 1211px, em conversions based on 16px base font size set in body declaration*/
 body {background:#e4e8e9 url("../img/bg-texture-greyboard.jpg") repeat left top;width:648px;-webkit-tap-highlight-color:#ff0;padding:10px 60px 0;}
-#doc > div {float:left;width:348px;margin-right:24px;margin-bottom:24px;background:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;padding:24px;}
+#doc > div {float:left;width:348px;margin-right:24px;margin-bottom:24px;background:#fff;border-radius:10px;padding:24px;}
 #doc > aside {float:right;width:228px;margin-bottom:24px;}
 #doc > aside:first-of-type {margin-bottom:0;}
 #doc > aside img {width:218px;background-color:#FFF;border:1px solid #DDD;-webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.2);-moz-box-shadow:2px 2px 2px rgba(0,0,0,0.2);padding:4px;}
