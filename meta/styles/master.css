@@ -23,7 +23,7 @@ a {color:#39444a;}
 #nav li:nth-child(1) {padding-left:0;}
 .hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
 .settings-icon:before {content: "\2630\ ";font-size:1.1em}
-div#main {min-height:260px;height:auto!important;height:260px;}
+#main {min-height:260px;height:auto!important;height:260px;}
 footer {border-top:1px solid #9fb3bd;}
 footer p {margin:15px 0 0;}
 
@@ -62,7 +62,7 @@ aside,div {margin-top:24px;}
 section {margin-top:0;}
 section > p:first-child,div > p:first-child {margin:0;}
 ul {list-style-type:square;list-style-position:outside;margin:14px 0 0 16px;}
-ol {list-style-type:number;list-style-position:outside;margin:14px 0 0 16px;}
+ol {list-style-type:decimal;list-style-position:outside;margin:14px 0 0 16px;}
 #links li:nth-child(n+1) {margin-bottom:8px;}
 #links li:last-child {margin-bottom:0;}
 p {margin:5px 0;}
