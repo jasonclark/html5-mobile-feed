@@ -13,12 +13,15 @@
 <link rel="stylesheet" media="all" href="./meta/styles/master.css"/>
 <script type="text/javascript">
 //set global variables, use html5 localStorage if available
-if (typeof(Storage) !== 'undefined') {
-	var feedUrl = window.localStorage.getItem("feedUri");
-	var siteUrl = window.localStorage.getItem("siteUri");
-} else {
+if (typeof(window.localStorage) === 'undefined') {
 	var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
 	var siteUrl = 'http://www.lib.montana.edu';
+} else if (localStorage.getItem("feedUri") === null) {
+	var feedUrl = null;
+	var siteUrl = null;
+} else {
+	var feedUrl = window.localStorage.getItem("feedUri");
+	var siteUrl = window.localStorage.getItem("siteUri");
 }
 
 //function to create page views based on hash in url
