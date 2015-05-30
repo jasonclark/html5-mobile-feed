@@ -4,265 +4,271 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title property="name">Mobile Feed App</title>
-<meta name="description" property="description" content="A single page app using HTML5 markup, CSS3, & Javascript APIs to create a mobile feed search/display as a teaching tool for HTML5 courses."/>
-<link rel="alternate" href="http://www.lib.montana.edu/~jason/files/html5-mobile-feed/" hreflang="en-us" />
+<title>Mobile Feed App</title>
+<meta name="description" content="A single page app using HTML5 markup, CSS3, & Javascript APIs to create a mobile feed search/display as a teaching tool for HTML5 courses."/>
+<link href="http://www.lib.montana.edu/~jason/files/html5-mobile-feed/" hreflang="en-us" rel="alternate">
 <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<link rel="stylesheet" media="all" href="./meta/styles/master.css"/>
+<link href="./meta/styles/master.css" media="all" rel="stylesheet">
 <script type="text/javascript">
-//set global variables, use html5 localStorage if available
-if (typeof window.localStorage === 'undefined') {
-	var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
-	var siteUrl = 'http://www.lib.montana.edu';
-} else if (localStorage.getItem("feedUri") === null) {
-	var feedUrl = null;
-	var siteUrl = null;
-} else {
-	var feedUrl = window.localStorage.getItem("feedUri");
-	var siteUrl = window.localStorage.getItem("siteUri");
-}
+  // set global variables, use html5 localStorage if available
+  if (typeof window.localStorage === 'undefined') {
+    var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
+    var siteUrl = 'http://www.lib.montana.edu';
+  } else if (localStorage.getItem("feedUri") === null) {
+    var feedUrl = null;
+    var siteUrl = null;
+  } else {
+    var feedUrl = window.localStorage.getItem("feedUri");
+    var siteUrl = window.localStorage.getItem("siteUri");
+  }
 
-//function to create page views based on hash in url
-function setView(name) {
-	var name;
-	var i;
-	var views = document.getElementsByTagName("section");
-	if (!name) { name = "#home"; }
-	  var length = views.length;
-		for (i=0; i<length; ++i) {
-			if (name === "#"+views[i].id) {
-				views[i].style.display = "block";
-			} else {
-				views[i].style.display = "none";
-			}
-		}
-	}
+  // function to create page views based on hash in url
+  function setView(name) {
+    var name;
+    var i;
+    var views = document.getElementsByTagName("section");
+    if (!name) { name = "#home"; }
+      var length = views.length;
+        for (i=0; i<length; ++i) {
+            if (name === "#"+views[i].id) {
+                views[i].style.display = "block";
+            } else {
+                views[i].style.display = "none";
+            }
+        }
+    }
   var checkHash = (function() {
-		var hash;
-		return function() {
-			if (window.location.hash !== hash) {
-				hash = window.location.hash;
-				setView(hash);
-			}
+        var hash;
+        return function() {
+            if (window.location.hash !== hash) {
+                hash = window.location.hash;
+                setView(hash);
+            }
   };
-})();
+  })();
 
-function init() {
-	setInterval(checkHash, 100);
-}
+  function init() {
+    setInterval(checkHash, 100);
+  }
 
-//call our init function when the page loads
-window.onload = init;
+  // call our init function when the page loads
+  window.onload = init;
 </script>
 </head>
 <body role="document" typeof="WebPage">
-	<div id="doc">
-        <header role="banner" property="name description">
-            <h1>Mobile Feed App</h1>
-        </header>
-        <nav role="navigation">
-            <ul id="nav" property="breadcrumb">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#search">Search</a></li>
-            <li><a href="#browse">Browse</a></li>
-            <li><a class="settings-icon" href="#set">Set</a></li>
-            </ul>
-        </nav>
-        <aside role="complementary">
-					<figure>
-					<img property="primaryImageOfPage" src="./meta/img/reader.jpg" alt="statue of a reader" />
-					<figcaption>statue of a reader</figcaption>
-					</figure>
-				</aside>
-        <div id="main">
-        <main role="main" property="mainContentOfPage">
-            <section id="home" role="region" aria-labelledby="home">
-                <header>
-                    <h2 property="headline">Latest items from our feed</h2>
-                </header>
-                <ul id="listView"></ul>
-                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-                <script type="text/javascript">
-                google.load("feeds", "1", {"callback" : showFeed});
-                function showFeed() {
-                    var feed = new google.feeds.Feed(feedUrl);
-                    feed.setNumEntries(3);
-                    feed.includeHistoricalEntries();
-                    feed.load(function(result) {
-                        if (!result.error) {
-                            var container = document.getElementById("listView");
-                        for (var i = 0; i < result.feed.entries.length; i++) {
-                            var entry = result.feed.entries[i];
-                            var li = document.createElement("li");
-                            li.innerHTML = '<article><h2><a href="' + entry.link + '">' + entry.title + '</a></h2><p>' + entry.content + '</p></article>';
-                            container.appendChild(li);
-                        }
-                    } else {
-                        var container = document.getElementById("listView");
-                        container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
-                    }
-                    });
+  <div id="doc">
+    <header role="banner" property="name description">
+      <h1>Mobile Feed App</h1>
+    </header>
+    <nav role="navigation">
+      <ul id="nav" property="breadcrumb">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#search">Search</a></li>
+        <li><a href="#browse">Browse</a></li>
+        <li><a class="settings-icon" href="#set">Set</a></li>
+      </ul>
+    </nav>
+    <aside role="complementary">
+      <figure>
+        <img property="primaryImageOfPage" alt="statue of a reader" src="./meta/img/reader.jpg">
+        <figcaption>statue of a reader</figcaption>
+      </figure>
+    </aside>
+    <div id="main">
+      <main property="mainContentOfPage" role="main">
+        <section id="home" role="region" aria-labelledby="home">
+          <header>
+            <h2 property="headline">Latest items from our feed</h2>
+          </header>
+          <ul id="listView"></ul>
+          <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+          <script type="text/javascript">
+            google.load("feeds", "1", {"callback" : showFeed});
+            function showFeed() {
+              var feed = new google.feeds.Feed(feedUrl);
+              feed.setNumEntries(3);
+              feed.includeHistoricalEntries();
+              feed.load(function(result) {
+                if (!result.error) {
+                  var container = document.getElementById("listView");
+                  for (var i = 0; i < result.feed.entries.length; i++) {
+                    var entry = result.feed.entries[i];
+                    var li = document.createElement("li");
+                    li.innerHTML = '<article><h2><a href="' + entry.link + '">' + entry.title + '</a></h2><p>' + entry.content + '</p></article>';
+                    container.appendChild(li);
+                  }
+                } else {
+                  var container = document.getElementById("listView");
+                  container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
                 }
-                </script>
-            </section>
-            <section id="search" role="region" aria-labelledby="search">
-                <header>
-                    <h2 property="alternativeHeadline">Search the latest items...</h2>
-                </header>
-                <form id="searchForm" role="search" action="http://search.yahoo.com/search" method="get">
-                    <label class="hidden" for="q">Search:</label>
-                    <input type="search" id="q" name="q" placeholder="Search..." autofocus />
-                    <input type="submit" value="find" />
-                </form>
-                <div id="results"></div>
-                <script type="text/javascript">
-                function query(term){
+            });
+            }
+          </script>
+        </section>
+        <section id="search" role="region" aria-labelledby="search">
+          <header>
+            <h2 property="alternativeHeadline">Search the latest items...</h2>
+          </header>
+          <form id="searchForm" role="search" action="http://search.yahoo.com/search" method="get">
+            <label class="hidden" for="q">Search:</label>
+            <input type="search" id="q" name="q" autofocus placeholder="Search..."/>
+            <input type="submit" value="find"/>
+          </form>
+          <div id="results"></div>
+          <script type="text/javascript">
+            function query(term){
+              var query = 'select * from feed where url="'+ feedUrl +'" AND title like "%'+encodeURIComponent(term)+'%" OR url="'+ feedUrl +'" AND description LIKE "%'+encodeURIComponent(term)+'%" | unique(field="link")';
 
-                    var query = 'select * from feed where url="'+ feedUrl +'" AND title like "%'+encodeURIComponent(term)+'%" OR url="'+ feedUrl +'" AND description LIKE "%'+encodeURIComponent(term)+'%" | unique(field="link")';
+              // start the URL by defining the API endpoint and encoding the query
+              var apiendpoint = 'http://query.yahooapis.com/v1/public/yql?q=';
+              var url = apiendpoint + encodeURIComponent(query);
 
-                    // start the URL by defining the API endpoint and encoding the query
-                    var apiendpoint = 'http://query.yahooapis.com/v1/public/yql?q=';
-                    var url = apiendpoint + encodeURIComponent(query);
+              // diagnostics - remove if you don't need them
+              url += '&diagnostics=true';
 
-                    // diagnostics - remove if you don't need them
-                    url += '&diagnostics=true';
+              // format (json or xml)
+              url += '&format=json';
 
-                    // format (json or xml)
-                    url += '&format=json';
+              // callback function (when format is json this triggers JSON-P-X output)
+              url += '&callback=searchFeed';
 
-                    // callback function (when format is json this triggers JSON-P-X output)
-                    url += '&callback=searchFeed';
+              // environment. this gives you access to the community tables
+              url += '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
 
-                    // environment. this gives you access to the community tables
-                    url += '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
-
-                    var s = document.createElement('script');
-                    s.setAttribute('src',url);
-                    document.getElementsByTagName('head')[0].appendChild(s);
+              var s = document.createElement('script');
+              s.setAttribute('src',url);
+              document.getElementsByTagName('head')[0].appendChild(s);
+            }
+            function searchFeed(o){
+              if(o.query && o.query.results && o.query.results.item){
+                var res = o.query.results.item,
+                out = '<ol>',
+                i = 0,
+                entry = '';
+                for(i=0,j=res.length;i<j;i++){
+                  entry = res[i];
+                  out += '<li><h2><a href="'+entry.link+'">'+entry.title+'</a></h2><p>'+entry.description+'</p></li>';
                 }
-                function searchFeed(o){
-                    if(o.query && o.query.results && o.query.results.item){
-                        var res = o.query.results.item,
-                        out = '<ol>',
-                        i = 0,
-                        entry = '';
-                        for(i=0,j=res.length;i<j;i++){
-                            entry = res[i];
-                            out += '<li><h2><a href="'+entry.link+'">'+entry.title+'</a></h2><p>'+entry.description+'</p></li>';
-                        }
-                        out += '</ol>';
-                        out += '<p><a href="#search">&#10010; new search</a><p>';
-                        output.innerHTML = out;
-                        } else {
-                            output.innerHTML = '<p class="error">No search results. <a href="#search">&#10010; Try another search</a>.</p>';
-                        }
-                };
+                out += '</ol>';
+                out += '<p><a href="#search">&#10010; new search</a><p>';
+                output.innerHTML = out;
+              } else {
+                output.innerHTML = '<p class="error">No search results. <a href="#search">&#10010; Try another search</a>.</p>';
+              }
+              };
 
-                var output = document.createElement('div');
-                output.setAttribute('id','yqldata');
-                document.getElementById('results').appendChild(output);
+              var output = document.createElement('div');
+              output.setAttribute('id','yqldata');
+              document.getElementById('results').appendChild(output);
 
-                var f = document.getElementsByTagName('form')[0];
-                    f.onsubmit = function(){
-                        output.innerHTML = 'Loading&hellip;';
-                        query(document.getElementById('q').value);
-                        return false;
-                    };
-                </script>
-            </section>
-            <section id="browse" role="region" aria-labelledby="browse">
-                <header>
-                    <h2 property="alternativeHeadline">Browse the latest items...</h2>
-                </header>
-                <ul id="viewObjects"></ul>
-                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-                <script type="text/javascript">
-                google.load("feeds", "1", {"callback" : listObjects});
-                function listObjects() {
-                    var feed = new google.feeds.Feed(feedUrl);
-                    feed.setNumEntries(30);
-                    feed.includeHistoricalEntries();
-                    feed.load(function(result) {
-                        if (!result.error) {
-                            var container = document.getElementById("viewObjects");
-                        for (var i = 0; i < result.feed.entries.length; i++) {
-                            var entry = result.feed.entries[i];
-                            var li = document.createElement("li");
-                            li.innerHTML = '<article><h2><a href="' + entry.link + '">' + entry.title + '</a></h2><p>' + entry.content + '</p></article>';
-                            container.appendChild(li);
-                        }
-                    } else {
-                        var container = document.getElementById("viewObjects");
-                        container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
-                        //container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
-                    }
-                    });
+              var f = document.getElementsByTagName('form')[0];
+              f.onsubmit = function(){
+                output.innerHTML = 'Loading&hellip;';
+                query(document.getElementById('q').value);
+                return false;
+              };
+          </script>
+        </section>
+        <section id="browse" role="region" aria-labelledby="browse">
+          <header>
+            <h2 property="alternativeHeadline">Browse the latest items...</h2>
+          </header>
+          <ul id="viewObjects"></ul>
+          <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+          <script type="text/javascript">
+            google.load("feeds", "1", {"callback" : listObjects});
+            function listObjects() {
+              var feed = new google.feeds.Feed(feedUrl);
+              feed.setNumEntries(30);
+              feed.includeHistoricalEntries();
+              feed.load(function(result) {
+              if (!result.error) {
+                var container = document.getElementById("viewObjects");
+                for (var i = 0; i < result.feed.entries.length; i++) {
+                  var entry = result.feed.entries[i];
+                  var li = document.createElement("li");
+                  li.innerHTML = '<article><h2><a href="' + entry.link + '">' + entry.title + '</a></h2><p>' + entry.content + '</p></article>';
+                  container.appendChild(li);
                 }
-                </script>
-            </section>
-            <section id="set" role="region" aria-labelledby="set">
-            	<header>
-            		<h2 property="alternativeHeadline">App Settings</h2>
-              </header>
-                <form class="settings" id="settings" action="#set">
-                <label for="feed">Set feed URL for app</label>
-								<input type="text" name="feed" id="feed" value="" />
-								<label for="site">Set site URL for app</label>
-								<input type="text" name="site" id="site" value="" />
-    						<p id="message"></p>
-    						<input type="submit" name="save" id="save" value="save" />
-    						<input type="submit" name="clear" id="clear" value="clear" />
-								</form>
-    		<script type="text/javascript">
-    		//set variables for app settings routine
-				var feed = document.getElementById("feed");
-				var site = document.getElementById("site");
-				var msg = document.getElementById("message");
+              } else {
+                var container = document.getElementById("viewObjects");
+                container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
+                //container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
+              }
+            });
+            }
+          </script>
+        </section>
+        <section id="set" role="region" aria-labelledby="set">
+          <header>
+            <h2 property="alternativeHeadline">App Settings</h2>
+          </header>
+          <form class="settings" id="settings" name="settings" action="#set">
+            <label for="feed">Set feed URL for app</label>
+            <input id="feed" name="feed" type="text" value=""/>
+            <label for="site">Set site URL for app</label>
+            <input id="site" name="site" type="text" value=""/>
+            <p id="message"></p>
+            <input id="save" name="save" type="submit" value="save"/>
+            <input id="clear" name="clear" type="submit" value="clear"/>
+          </form>
+          <script type="text/javascript">
+          // set variables for app settings routine
+          var feed = document.getElementById("feed");
+          var site = document.getElementById("site");
+          var msg = document.getElementById("message");
 
-    			//show data from previous edit in form
-    			if (!feed.value) {
-  					feed.value = window.localStorage.getItem('feedUri');
-				}
+          // show data from previous edit in form
+          if (!feed.value) {
+            feed.value = window.localStorage.getItem('feedUri');
+          }
+          if (!site.value) {
+            site.value = window.localStorage.getItem('siteUri');
+          }
 
-				if (!site.value) {
-  					site.value = window.localStorage.getItem('siteUri');
-				}
+          function saveData() {
+            window.localStorage.setItem("feedUri", feed.value);
+            window.localStorage.setItem("siteUri", site.value);
+            // after 3.5 seconds, reload page with new values once data is saved
+            setTimeout(function() {
+              document.location.reload(true);
+            }, 3500);
+            msg.innerHTML = '<strong class="loading">Hold on... Saving feed and site settings.</strong>';
+          }
 
-    		function saveData() {
-					window.localStorage.setItem("feedUri", feed.value);
-					window.localStorage.setItem("siteUri", site.value);
-					msg.innerHTML = '<strong>Feed and site settings saved.</strong>';
-				}
+          function clearData() {
+            window.localStorage.clear();
+            document.getElementById("message").innerHTML="";
+            feed.value = feed.defaultValue;
+            site.value = site.defaultValue;
+            // after 3.5 seconds, reload page with empty values once data is cleared
+            setTimeout(function() {
+              document.location.reload(true);
+            }, 3500);
+            msg.innerHTML = '<strong class="loading">Hold on... Clearing feed and site settings.</strong>';
+          }
 
-				function clearData() {
-					window.localStorage.clear();
-					document.getElementById("message").innerHTML="";
-					feed.value = feed.defaultValue;
-					site.value = site.defaultValue;
-					msg.innerHTML = '<strong>Feed and site settings cleared.</strong>';
-				}
-
-				//create click events for each form button
-				document.getElementById("save").onclick = function() { saveData(); return false;};
-				document.getElementById("clear").onclick = function() { clearData(); return false;};
-    		</script>
-            </section>
-        </main>
-        </div><!-- end #main -->
-        <aside role="complementary">
-            <header>
-                <h2>Related Items</h2>
-            </header>
-            <ul id="links">
-                <li><a property="significantLink" href="http://www.lib.montana.edu" rel="external">Full library web site</a></li>
-                <li><a property="relatedLink" href="http://www.lib.montana.edu/hours/" rel="external">Library hours</a></li>
-            </ul>
-        </aside>
-        <footer role="contentinfo">
-            <p>demo by <a property="accountablePerson author creator publisher" href="http://twitter.com/jaclark">@jaclark</a> | <a property="relatedLink" href="../html5-mobile-feed.zip">get code</a> | &copy; <span property="publisher sourceOrganization">MSU Library</span></p>
-        </footer>
-    </div><!-- end #doc -->
+          // create click events for each form button
+          document.getElementById("save").onclick = function() { saveData(); return false;};
+          document.getElementById("clear").onclick = function() { clearData(); return false;};
+          </script>
+        </section>
+      </main>
+    </div><!-- end #main -->
+    <aside role="complementary">
+      <header>
+        <h2>Related Items</h2>
+      </header>
+      <ul id="links">
+        <li><a property="significantLink" href="http://www.lib.montana.edu" rel="external">Full library web site</a></li>
+        <li><a property="relatedLink" href="http://www.lib.montana.edu/hours/" rel="external">Library hours</a></li>
+      </ul>
+    </aside>
+    <footer role="contentinfo">
+      <p>demo by <a property="accountablePerson author creator publisher" href="http://twitter.com/jaclark">@jaclark</a> | <a property="relatedLink" href="../html5-mobile-feed.zip">get code</a> | &copy; <span property="publisher sourceOrganization">MSU Library</span></p>
+    </footer>
+  </div><!-- end #doc -->
 </body>
 </html>
