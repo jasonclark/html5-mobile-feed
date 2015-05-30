@@ -30,7 +30,8 @@ function setView(name) {
 	var i;
 	var views = document.getElementsByTagName("section");
 	if (!name) { name = "#home"; }
-		for (i=0; i<views.length; ++i) {
+	  var length = views.length;
+		for (i=0; i<length; ++i) {
 			if (name === "#"+views[i].id) {
 				views[i].style.display = "block";
 			} else {
@@ -229,7 +230,7 @@ window.onload = init;
   					site.value = window.localStorage.getItem('siteUri');
 				}
 
-    			function saveData() {
+    		function saveData() {
 					window.localStorage.setItem("feedUri", feed.value);
 					window.localStorage.setItem("siteUri", site.value);
 					msg.innerHTML = '<strong>Feed and site settings saved.</strong>';
