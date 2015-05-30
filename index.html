@@ -13,7 +13,7 @@
 <link rel="stylesheet" media="all" href="./meta/styles/master.css"/>
 <script type="text/javascript">
 //set global variables, use html5 localStorage if available
-if (typeof(window.localStorage) === 'undefined') {
+if (typeof window.localStorage === 'undefined') {
 	var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
 	var siteUrl = 'http://www.lib.montana.edu';
 } else if (localStorage.getItem("feedUri") === null) {
@@ -38,14 +38,14 @@ function setView(name) {
 			}
 		}
 	}
-	checkHash = (function() {
+  var checkHash = (function() {
 		var hash;
 		return function() {
 			if (window.location.hash !== hash) {
 				hash = window.location.hash;
 				setView(hash);
 			}
-		}
+  };
 })();
 
 function init() {
