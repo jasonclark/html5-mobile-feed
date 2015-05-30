@@ -23,6 +23,7 @@ a {color:#39444a;}
 #nav li:nth-child(1) {padding-left:0;}
 .hidden {border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
 .settings-icon:before {content: "\2630\ ";font-size:1.1em}
+.loading {background:url("../img/loading.gif") no-repeat 0 0;padding-left:23px;}
 #main {min-height:260px;height:auto!important;height:260px;}
 footer {border-top:1px solid #9fb3bd;}
 footer p {margin:15px 0 0;}
