@@ -1,5 +1,6 @@
 {
 	"default_locale": "en",
+	"lang": "en",
 	"background_color": "#6A7389",
 	"name": "HTML5 Mobile Feed App",
 	"short_name": "MobileFeed",
