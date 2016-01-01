@@ -1,0 +1,14 @@
+{
+	"lang": "en",
+	"background_color": "#6A7389",
+	"name": "HTML5 Mobile Feed App",
+	"short_name": "MobileFeed",
+	"display": "standalone",
+	"icons": [
+		{
+		"src": "./meta/img/manifest.png",
+		"sizes": "144x144",
+		"type": "image/png"
+		}
+	]
+}
