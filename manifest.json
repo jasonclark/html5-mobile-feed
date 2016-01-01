@@ -1,8 +1,13 @@
 {
-	"lang": "en",
+	"default_locale": "en",
 	"background_color": "#6A7389",
 	"name": "HTML5 Mobile Feed App",
 	"short_name": "MobileFeed",
+	"description": "A single page app using HTML5 markup, CSS3, & Javascript APIs to create a mobile feed search/display as a teaching tool for HTML5 courses.",
+	"developer": {
+		"name": "Jason A. Clark",
+		"url": "http://www.jasonclark.info"
+	},	
 	"display": "standalone",
 	"icons": [
 		{
