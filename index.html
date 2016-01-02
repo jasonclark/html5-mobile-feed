@@ -72,11 +72,11 @@
       <h1>Mobile Feed App</h1>
     </header>
     <nav role="navigation">
-      <ul id="nav" property="breadcrumb">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#search">Search</a></li>
-        <li><a href="#browse">Browse</a></li>
-        <li><a class="settings-icon" href="#set">Set</a></li>
+      <ul id="nav" property="breadcrumb" role="tablist">
+        <li role="tab" aria-controls="main"><a href="#home">Home</a></li>
+        <li role="tab" aria-controls="main"><a href="#search">Search</a></li>
+        <li role="tab" aria-controls="main"><a href="#browse">Browse</a></li>
+        <li role="tab" aria-controls="main"><a class="settings-icon" href="#set">Set</a></li>
       </ul>
     </nav>
     <aside role="complementary">
@@ -85,7 +85,7 @@
         <figcaption>statue of a reader</figcaption>
       </figure>
     </aside>
-    <div id="main">
+    <div id="main" role="tabpanel">
       <main property="mainContentOfPage" role="main">
         <section id="home" role="region" aria-labelledby="home">
           <header>
