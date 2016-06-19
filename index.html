@@ -92,30 +92,36 @@
             <h2 property="headline">Latest items from our feed</h2>
           </header>
           <ul id="listView"></ul>
-          <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-          <script type="text/javascript">
-            google.load("feeds", "1", {"callback" : showFeed});
-            function showFeed() {
-              var feed = new google.feeds.Feed(feedUrl);
-              feed.setNumEntries(3);
-              feed.includeHistoricalEntries();
-              feed.load(function(result) {
-                if (!result.error) {
-                  var container = document.getElementById("listView");
-                  for (var i = 0; i < result.feed.entries.length; i++) {
-                    var entry = result.feed.entries[i];
-                    var li = document.createElement("li");
-                    li.innerHTML = '<article><h2><a href="' + entry.link + '">' + entry.title + '</a></h2><p>' + entry.content + '</p></article>';
-                    container.appendChild(li);
-                  }
-                } else {
-                  var container = document.getElementById("listView");
-                  container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
-                }
-            });
-            }
-          </script>
-        </section>
+<script>
+var container = document.getElementById("listView");
+var source = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22' + encodeURIComponent(feedUrl) + '%22%20limit%203&format=json&diagnostics=true&callback=';
+
+getFeed(source);
+
+function getFeed(url) {
+  fetch(url).then(function(response) {
+    if (response.headers.get("content-type").indexOf("application/json") !== -1) {
+      return response.json();
+    } else {
+      throw new TypeError('Response from "' + url + '" has unexpected "content-type"');
+    }
+  }).then(function(data) {
+    console.log('JSON from "' + url + '" parsed successfully!');
+    console.log(data);
+    for (i = 0; i < data.query.results.item.length; i++) {
+      var item = data.query.results.item[i];
+      var li = document.createElement('li');
+      li.innerHTML = '<article><h2><a href="' + item.link + '">' + item.title + '</a></h2><p>' + item.description + '</p></article>';
+      container.appendChild(li);
+    }
+  }).catch(function(error) {
+    console.error(error.message);
+    var container = document.getElementById("listView");
+    container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
+  });
+}
+</script>
+</section>
         <section id="search" role="region" aria-labelledby="search">
           <header>
             <h2 property="alternativeHeadline">Search the latest items...</h2>
