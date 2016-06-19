@@ -126,7 +126,7 @@ function getFeed(url) {
           <header>
             <h2 property="alternativeHeadline">Search the latest items...</h2>
           </header>
-          <form id="searchForm" role="search" action="http://search.yahoo.com/search" method="get">
+          <form id="searchForm" role="search" action="https://search.yahoo.com/search" method="get">
             <label class="hidden" for="q">Search:</label>
             <input type="search" id="q" name="q" autofocus placeholder="Search..."/>
             <input type="submit" value="find"/>
@@ -137,7 +137,7 @@ function getFeed(url) {
               var query = 'select * from feed where url="'+ feedUrl +'" AND title like "%'+encodeURIComponent(term)+'%" OR url="'+ feedUrl +'" AND description LIKE "%'+encodeURIComponent(term)+'%" | unique(field="link")';
 
               // start the URL by defining the API endpoint and encoding the query
-              var apiendpoint = 'http://query.yahooapis.com/v1/public/yql?q=';
+              var apiendpoint = 'https://query.yahooapis.com/v1/public/yql?q=';
               var url = apiendpoint + encodeURIComponent(query);
 
               // diagnostics - remove if you don't need them
@@ -181,7 +181,8 @@ function getFeed(url) {
               var f = document.getElementsByTagName('form')[0];
               f.onsubmit = function(){
                 output.innerHTML = 'Loading&hellip;';
-                query(document.getElementById('q').value);
+                var searchTerm = document.getElementById('q').value;
+                query(searchTerm);
                 return false;
               };
           </script>
