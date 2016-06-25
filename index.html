@@ -95,11 +95,12 @@
 <script>
 var container = document.getElementById("listView");
 var source = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22' + encodeURIComponent(feedUrl) + '%22%20limit%203&format=json&diagnostics=true&callback=';
+var options = {cache:'no-store', method:'GET'};
 
-getFeed(source);
+getFeed(source, options);
 
-function getFeed(url) {
-  fetch(url).then(function(response) {
+function getFeed(url, options) {
+  fetch(url, options).then(function(response) {
     if (response.headers.get("content-type").indexOf("application/json") !== -1) {
       return response.json();
     } else {
