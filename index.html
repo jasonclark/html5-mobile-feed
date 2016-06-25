@@ -95,7 +95,7 @@
 <script>
 var container = document.getElementById("listView");
 var source = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22' + encodeURIComponent(feedUrl) + '%22%20limit%203&format=json&diagnostics=true&callback=';
-var options = {cache:'no-store', method:'GET'};
+var options = {cache:'reload', method:'GET'};
 
 getFeed(source, options);
 
