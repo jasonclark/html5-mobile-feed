@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="./meta/styles/master.css"/>
 <script type="text/javascript">
   // set global variables, use html5 localStorage if available
-  if (typeof window.localStorage === 'undefined') {
+  if (typeof window.localStorage === 'undefined' && window.localStorage === null) {
     var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
     var siteUrl = 'http://www.lib.montana.edu';
   } else if (localStorage.getItem("feedUri") === null) {
