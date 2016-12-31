@@ -198,11 +198,12 @@ function getFeed(url, options) {
             google.load("feeds", "1", {"callback" : listObjects});
             function listObjects() {
               var feed = new google.feeds.Feed(feedUrl);
+              var container = document.getElementById("viewObjects");
               feed.setNumEntries(30);
               feed.includeHistoricalEntries();
               feed.load(function(result) {
               if (!result.error) {
-                var container = document.getElementById("viewObjects");
+                console.log(result);
                 for (var i = 0; i < result.feed.entries.length; i++) {
                   var entry = result.feed.entries[i];
                   var li = document.createElement("li");
@@ -210,7 +211,7 @@ function getFeed(url, options) {
                   container.appendChild(li);
                 }
               } else {
-                var container = document.getElementById("viewObjects");
+                console.log(result.error);
                 container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
                 //container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
               }
