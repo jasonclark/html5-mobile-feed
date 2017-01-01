@@ -193,31 +193,29 @@ function getFeed(url, options) {
             <h2 property="alternativeHeadline">Browse the latest items...</h2>
           </header>
           <ul id="viewObjects"></ul>
-          <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-          <script type="text/javascript">
-            google.load("feeds", "1", {"callback" : listObjects});
-            function listObjects() {
-              var feed = new google.feeds.Feed(feedUrl);
-              var container = document.getElementById("viewObjects");
-              feed.setNumEntries(30);
-              feed.includeHistoricalEntries();
-              feed.load(function(result) {
-              if (!result.error) {
-                console.log(result);
-                for (var i = 0; i < result.feed.entries.length; i++) {
-                  var entry = result.feed.entries[i];
-                  var li = document.createElement("li");
-                  li.innerHTML = '<article><h2><a href="' + entry.link + '">' + entry.title + '</a></h2><p>' + entry.content + '</p></article>';
-                  container.appendChild(li);
-                }
-              } else {
-                console.log(result.error);
-                container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
-                //container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
-              }
-            });
-            }
-          </script>
+<script type="text/javascript" src="./meta/scripts/feednami-client-v1.1.js"></script>
+<script type="text/javascript">
+feednami.setPublicApiKey('ADD-YOUR-FEEDNAMI-PUBLIC-API-KEY');
+//see https://toolkit.sekando.com/docs/en/setup/hostnames and https://toolkit.sekando.com/docs/en/feednami for details
+feednami.loadGoogleFormat(feedUrl, function(result) {
+  var container = document.getElementById("viewObjects");
+  if (result.error) {
+    console.log(result.error);
+    container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
+    //container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
+  } else {
+    var entries = result.feed.entries;
+    for (var i = 0; i < entries.length; i++) {
+      var entry = entries[i];
+      console.log(entry.title);
+      console.log(entry.contentSnippet);
+      var li = document.createElement('li');
+      li.innerHTML = '<article><h2><a href="' + entry.link + '">' + entry.title + '</a></h2><p>' + entry.content + '</p></article>';
+      container.appendChild(li);
+    }
+  }
+});
+</script>
         </section>
         <section id="set" role="region" aria-labelledby="set">
           <header>
