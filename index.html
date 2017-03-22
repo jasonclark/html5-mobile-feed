@@ -35,8 +35,8 @@ if (typeof window.localStorage === 'undefined' && window.localStorage === null) 
 }
 // create page views based on hash in url
 function setView(name) {
-  const name;
-  const i;
+  let name;
+  let i;
   const views = document.getElementsByTagName("section");
   if (!name) {
     name = "#home";
@@ -52,7 +52,7 @@ function setView(name) {
 }
 // watch hash and setView
 const checkHash = (function() {
-  const hash;
+  let hash;
   return function() {
     if (window.location.hash !== hash) {
       hash = window.location.hash;
