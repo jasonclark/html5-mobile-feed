@@ -118,31 +118,31 @@ window.onload = init;
           </header>
           <ul id="listView"></ul>
 <script>
-var container = document.getElementById("listView");
-var source = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22' + encodeURIComponent(feedUrl) + '%22%20limit%203&format=json&diagnostics=true&callback=';
-var options = {cache:'reload', method:'GET'};
+const container = document.getElementById("listView");
+const source = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22${encodeURIComponent(feedUrl)}%22%20limit%203&format=json&diagnostics=true&callback=`;
+const options = {cache:'reload', method:'GET'};
 
 getFeed(source, options);
 
 function getFeed(url, options) {
-  fetch(url, options).then(function(response) {
-    if (response.headers.get("content-type").indexOf("application/json") !== -1) {
+  fetch(url, options).then(response => {
+    if (response.headers.get("content-type").includes("application/json")) {
       return response.json();
     } else {
-      throw new TypeError('Response from "' + url + '" has unexpected "content-type"');
+      throw new TypeError(`Response from "${url}" has unexpected "content-type"`);
     }
-  }).then(function(data) {
-    console.log('JSON from "' + url + '" parsed successfully!');
+  }).then(data => {
+    console.log(`JSON from "${url}" parsed successfully!`);
     console.log(data);
     for (i = 0; i < data.query.results.item.length; i++) {
-      var item = data.query.results.item[i];
-      var li = document.createElement('li');
-      li.innerHTML = '<article><h2><a href="' + item.link + '">' + item.title + '</a></h2><p>' + item.description + '</p></article>';
+      const item = data.query.results.item[i];
+      const li = document.createElement('li');
+      li.innerHTML = `<article><h2><a href="${item.link}">${item.title}</a></h2><p>${item.description}</p></article>`;
       container.appendChild(li);
     }
-  }).catch(function(error) {
+  }).catch(error => {
     console.error(error.message);
-    var container = document.getElementById("listView");
+    const container = document.getElementById("listView");
     container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
   });
 }
