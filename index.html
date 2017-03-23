@@ -21,21 +21,44 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <link rel="stylesheet" href="./meta/styles/master.css"/>
-<script type="text/javascript">
-// set global variables, use html5 localStorage if available
+<style>
+/* view visibility logic and animation */
+/*
+main > * {
+ display: none;
+}
+main > *:last-child {
+ display: block;
+}
+@keyframes pulse {
+  0% { transform: scale(1) }
+  50% { transform: scale(1.05) }
+  100% { transform: scale(1) }
+}
+main > *:target {
+  display: block;
+  animation: pulse 0.5s linear 1;
+}
+main > *:target ~ * {
+  display: none;
+}
+*/	
+</style>
+<script>
+// set global variables for feed and URL values	
 if (typeof window.localStorage === 'undefined' && window.localStorage === null) {
-  let feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
-  let siteUrl = 'http://www.lib.montana.edu';
+  var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
+  var siteUrl = 'http://www.lib.montana.edu';
 } else if (localStorage.getItem("feedUri") === null) {
-  let feedUrl = null;
-  let siteUrl = null;
+  var feedUrl = null;
+  var siteUrl = null;
 } else {
-  let feedUrl = window.localStorage.getItem("feedUri");
-  let siteUrl = window.localStorage.getItem("siteUri");
+  var feedUrl = window.localStorage.getItem("feedUri");
+  var siteUrl = window.localStorage.getItem("siteUri");
 }
 // create page views based on hash in url
 function setView(name) {
-  let name;
+  var name;
   let i;
   const views = document.getElementsByTagName("section");
   if (!name) {
@@ -43,7 +66,7 @@ function setView(name) {
   }
   const length = views.length;
   for (i = 0; i < length; ++i) {
-    if (name === "#" + views[i].id) {
+    if (name === `#${views[i].id}`) {
       views[i].style.display = "block";
     } else {
       views[i].style.display = "none";
@@ -51,20 +74,20 @@ function setView(name) {
   }
 }
 // watch hash and setView
-const checkHash = (function() {
+const checkHash = ((() => {
   let hash;
-  return function() {
+  return () => {
     if (window.location.hash !== hash) {
       hash = window.location.hash;
       setView(hash);
     }
   };
-})();
+}))();
 // set timing to check hash
 function init() {
   setInterval(checkHash, 100);
 }
-// call our init function when the page loads
+// start script when the page loads
 window.onload = init;
 </script>
 </head>
