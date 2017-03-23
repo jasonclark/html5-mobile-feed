@@ -256,9 +256,9 @@ feednami.loadGoogleFormat(feedUrl, result => {
           </form>
           <script type="text/javascript">
           // set variables for app settings routine
-          var feed = document.getElementById("feed");
-          var site = document.getElementById("site");
-          var msg = document.getElementById("message");
+          const feed = document.getElementById("feed");
+          const site = document.getElementById("site");
+          const msg = document.getElementById("message");
 
           // show data from previous edit in form
           if (!feed.value) {
@@ -272,7 +272,7 @@ feednami.loadGoogleFormat(feedUrl, result => {
             window.localStorage.setItem("feedUri", feed.value);
             window.localStorage.setItem("siteUri", site.value);
             // after 3.5 seconds, reload page with new values once data is saved
-            setTimeout(function() {
+	    setTimeout(() => {
               document.location.reload(true);
             }, 3500);
             msg.innerHTML = '<strong class="loading">Hold on... Saving feed and site settings.</strong>';
@@ -284,7 +284,7 @@ feednami.loadGoogleFormat(feedUrl, result => {
             feed.value = feed.defaultValue;
             site.value = site.defaultValue;
             // after 3.5 seconds, reload page with empty values once data is cleared
-            setTimeout(function() {
+	    setTimeout(() => {
               document.location.reload(true);
             }, 3500);
             msg.innerHTML = '<strong class="loading">Hold on... Clearing feed and site settings.</strong>';
