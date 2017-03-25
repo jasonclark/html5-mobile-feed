@@ -1,0 +1,54 @@
+        <section id="set" role="region" aria-labelledby="set">
+          <header>
+            <h2 property="alternativeHeadline">App Settings</h2>
+          </header>
+          <form class="settings" id="settings" name="settings" action="#set">
+            <label for="feed">Set feed URL for app</label>
+            <input id="feed" name="feed" type="text" value=""/>
+            <label for="site">Set site URL for app</label>
+            <input id="site" name="site" type="text" value=""/>
+            <p id="message"></p>
+            <input id="save" name="save" type="submit" value="save"/>
+            <input id="clear" name="clear" type="submit" value="clear"/>
+          </form>
+          <script type="text/javascript">
+          // set variables for app settings routine
+          const feed = document.getElementById("feed");
+          const site = document.getElementById("site");
+          const msg = document.getElementById("message");
+
+          // show data from previous edit in form
+          if (!feed.value) {
+            feed.value = window.localStorage.getItem('feedUri');
+          }
+          if (!site.value) {
+            site.value = window.localStorage.getItem('siteUri');
+          }
+
+          function saveData() {
+            window.localStorage.setItem("feedUri", feed.value);
+            window.localStorage.setItem("siteUri", site.value);
+            // after 3.5 seconds, reload page with new values once data is saved
+	    setTimeout(() => {
+              document.location.reload(true);
+            }, 3500);
+            msg.innerHTML = '<strong class="loading">Hold on... Saving feed and site settings.</strong>';
+          }
+
+          function clearData() {
+            window.localStorage.clear();
+            document.getElementById("message").innerHTML="";
+            feed.value = feed.defaultValue;
+            site.value = site.defaultValue;
+            // after 3.5 seconds, reload page with empty values once data is cleared
+	    setTimeout(() => {
+              document.location.reload(true);
+            }, 3500);
+            msg.innerHTML = '<strong class="loading">Hold on... Clearing feed and site settings.</strong>';
+          }
+
+          // create click events for each form button
+          document.getElementById("save").onclick = function() { saveData(); return false;};
+          document.getElementById("clear").onclick = function() { clearData(); return false;};
+          </script>
+        </section>
