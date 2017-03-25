@@ -44,52 +44,6 @@ main > *:target ~ * {
 }
 */	
 </style>
-<script>
-// set global variables for feed and URL values	
-if (typeof window.localStorage === 'undefined' && window.localStorage === null) {
-  var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
-  var siteUrl = 'http://www.lib.montana.edu';
-} else if (localStorage.getItem("feedUri") === null) {
-  var feedUrl = null;
-  var siteUrl = null;
-} else {
-  var feedUrl = window.localStorage.getItem("feedUri");
-  var siteUrl = window.localStorage.getItem("siteUri");
-}
-// create page views based on hash in url
-function setView(name) {
-  var name;
-  let i;
-  const views = document.getElementsByTagName("section");
-  if (!name) {
-    name = "#home";
-  }
-  const length = views.length;
-  for (i = 0; i < length; ++i) {
-    if (name === `#${views[i].id}`) {
-      views[i].style.display = "block";
-    } else {
-      views[i].style.display = "none";
-    }
-  }
-}
-// watch hash and setView
-const checkHash = ((() => {
-  let hash;
-  return () => {
-    if (window.location.hash !== hash) {
-      hash = window.location.hash;
-      setView(hash);
-    }
-  };
-}))();
-// set timing to check hash
-function init() {
-  setInterval(checkHash, 100);
-}
-// start script when the page loads
-window.onload = init;
-</script>
 </head>
 <body role="document" typeof="WebPage">
   <div id="doc">
@@ -98,10 +52,10 @@ window.onload = init;
     </header>
     <nav role="navigation">
       <ul id="nav" property="breadcrumb" role="tablist">
-        <li role="tab" aria-controls="main"><a href="#home">Home</a></li>
-        <li role="tab" aria-controls="main"><a href="#search">Search</a></li>
-        <li role="tab" aria-controls="main"><a href="#browse">Browse</a></li>
-        <li role="tab" aria-controls="main"><a class="settings-icon" href="#set">Set</a></li>
+        <li role="tab" aria-controls="main"><a href="app/views/home.html">Home</a></li>
+        <li role="tab" aria-controls="main"><a href="app/views/search.html">Search</a></li>
+        <li role="tab" aria-controls="main"><a href="app/views/browse.html">Browse</a></li>
+        <li role="tab" aria-controls="main"><a class="settings-icon" href="app/views/set.html">Set</a></li>
       </ul>
     </nav>
     <aside role="complementary">
@@ -112,189 +66,6 @@ window.onload = init;
     </aside>
     <div id="main" role="tabpanel">
       <main property="mainContentOfPage" role="main">
-        <section id="home" role="region" aria-labelledby="home">
-          <header>
-            <h2 property="headline">Latest items from our feed</h2>
-          </header>
-          <ul id="listView"></ul>
-<script>
-const container = document.getElementById("listView");
-const source = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22${encodeURIComponent(feedUrl)}%22%20limit%203&format=json&diagnostics=true&callback=`;
-const options = {cache:'reload', method:'GET'};
-
-getFeed(source, options);
-
-function getFeed(url, options) {
-  fetch(url, options).then(response => {
-    if (response.headers.get("content-type").includes("application/json")) {
-      return response.json();
-    } else {
-      throw new TypeError(`Response from "${url}" has unexpected "content-type"`);
-    }
-  }).then(data => {
-    console.log(`JSON from "${url}" parsed successfully!`);
-    console.log(data);
-    for (i = 0; i < data.query.results.item.length; i++) {
-      const item = data.query.results.item[i];
-      const li = document.createElement('li');
-      li.innerHTML = `<article><h2><a href="${item.link}">${item.title}</a></h2><p>${item.description}</p></article>`;
-      container.appendChild(li);
-    }
-  }).catch(error => {
-    console.error(error.message);
-    const container = document.getElementById("listView");
-    container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
-  });
-}
-</script>
-</section>
-        <section id="search" role="region" aria-labelledby="search">
-          <header>
-            <h2 property="alternativeHeadline">Search the latest items...</h2>
-          </header>
-          <form id="searchForm" role="search" action="https://search.yahoo.com/search" method="get">
-            <label class="hidden" for="q">Search:</label>
-            <input type="search" id="q" name="q" autofocus placeholder="Search..."/>
-            <input type="submit" value="find"/>
-          </form>
-          <div id="results"></div>
-          <script type="text/javascript">
-            function query(term) {
-	      const query = `select * from feed where url="${feedUrl}" AND title like "%${encodeURIComponent(term)}%" OR url="${feedUrl}" AND description LIKE "%${encodeURIComponent(term)}%" | unique(field="link")`;
-
-              // start the URL by defining the API endpoint and encoding the query
-              const apiendpoint = 'https://query.yahooapis.com/v1/public/yql?q=';
-              let url = apiendpoint + encodeURIComponent(query);
-
-              // diagnostics - remove if you don't need them
-              url += '&diagnostics=true';
-
-              // format (json or xml)
-              url += '&format=json';
-
-              // callback function (when format is json this triggers JSON-P-X output)
-              url += '&callback=searchFeed';
-
-              // environment. this gives you access to the community tables
-              url += '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
-
-              const s = document.createElement('script');
-              s.setAttribute('src', url);
-              document.getElementsByTagName('head')[0].appendChild(s);
-            }
-            function searchFeed(o) {
-              if (o.query && o.query.results && o.query.results.item) {
-                const res = o.query.results.item;
-                let out = '<ol>';
-                let i = 0;
-                let entry = '';
-                for (i=0, j=res.length; i<j; i++) {
-                  entry = res[i];
-		  out += `<li><h2><a href="${entry.link}">${entry.title}</a></h2><p>${entry.description}</p></li>`;
-                }
-                out += '</ol>';
-                out += '<p><a href="#search">&#10010; new search</a><p>';
-                output.innerHTML = out;
-              } else {
-                output.innerHTML = '<p class="error">No search results. &#9785;</p><p><a href="#search">&#10010; Try another search</a>.</p>';
-              }
-            };
-
-            var output = document.createElement('div');
-            output.setAttribute('id','yqldata');
-            document.getElementById('results').appendChild(output);
-
-            const f = document.getElementsByTagName('form')[0];
-            f.onsubmit = () => {
-              output.innerHTML = 'Loading&hellip;';
-              const searchTerm = document.getElementById('q').value;
-                query(searchTerm);
-                return false;
-            };
-          </script>
-        </section>
-        <section id="browse" role="region" aria-labelledby="browse">
-          <header>
-            <h2 property="alternativeHeadline">Browse the latest items...</h2>
-          </header>
-          <ul id="viewObjects"></ul>
-<script src="./meta/scripts/feednami-client-v1.1.js"></script>
-<script>
-feednami.setPublicApiKey('ADD-YOUR-FEEDNAMI-PUBLIC-API-KEY');
-//see https://toolkit.sekando.com/docs/en/setup/hostnames and https://toolkit.sekando.com/docs/en/feednami for details
-feednami.loadGoogleFormat(feedUrl, result => {
-  const container = document.getElementById("viewObjects");
-  if (result.error) {
-    console.log(result.error);
-    container.innerHTML = '<li>No items available. <br /><a href="#set">Set the feed and site for this app</a>.</li>';
-    //container.innerHTML = '<li>No feeds available. <a href="'+ siteUrl +'">View full library web site</a>.</li>';
-  } else {
-    const entries = result.feed.entries;
-    for (const entry of entries) {
-      console.log(entry.title);
-      console.log(entry.contentSnippet);
-      const li = document.createElement('li');
-      li.innerHTML = `<article><h2><a href="${entry.link}">${entry.title}</a></h2><p>${entry.content}</p></article>`;
-      container.appendChild(li);
-    }
-  }
-});
-</script>
-        </section>
-        <section id="set" role="region" aria-labelledby="set">
-          <header>
-            <h2 property="alternativeHeadline">App Settings</h2>
-          </header>
-          <form class="settings" id="settings" name="settings" action="#set">
-            <label for="feed">Set feed URL for app</label>
-            <input id="feed" name="feed" type="text" value=""/>
-            <label for="site">Set site URL for app</label>
-            <input id="site" name="site" type="text" value=""/>
-            <p id="message"></p>
-            <input id="save" name="save" type="submit" value="save"/>
-            <input id="clear" name="clear" type="submit" value="clear"/>
-          </form>
-          <script type="text/javascript">
-          // set variables for app settings routine
-          const feed = document.getElementById("feed");
-          const site = document.getElementById("site");
-          const msg = document.getElementById("message");
-
-          // show data from previous edit in form
-          if (!feed.value) {
-            feed.value = window.localStorage.getItem('feedUri');
-          }
-          if (!site.value) {
-            site.value = window.localStorage.getItem('siteUri');
-          }
-
-          function saveData() {
-            window.localStorage.setItem("feedUri", feed.value);
-            window.localStorage.setItem("siteUri", site.value);
-            // after 3.5 seconds, reload page with new values once data is saved
-	    setTimeout(() => {
-              document.location.reload(true);
-            }, 3500);
-            msg.innerHTML = '<strong class="loading">Hold on... Saving feed and site settings.</strong>';
-          }
-
-          function clearData() {
-            window.localStorage.clear();
-            document.getElementById("message").innerHTML="";
-            feed.value = feed.defaultValue;
-            site.value = site.defaultValue;
-            // after 3.5 seconds, reload page with empty values once data is cleared
-	    setTimeout(() => {
-              document.location.reload(true);
-            }, 3500);
-            msg.innerHTML = '<strong class="loading">Hold on... Clearing feed and site settings.</strong>';
-          }
-
-          // create click events for each form button
-          document.getElementById("save").onclick = function() { saveData(); return false;};
-          document.getElementById("clear").onclick = function() { clearData(); return false;};
-          </script>
-        </section>
       </main>
     </div><!-- end #main -->
     <aside role="complementary">
@@ -310,5 +81,6 @@ feednami.loadGoogleFormat(feedUrl, result => {
       <p>demo by <a property="accountablePerson author creator publisher" href="http://twitter.com/jaclark">@jaclark</a> | <a property="relatedLink" href="https://github.com/jasonclark/html5-mobile-feed">get code</a> | &copy; <span property="publisher sourceOrganization">MSU Library</span></p>
     </footer>
   </div><!-- end #doc -->
+  <script defer src="app.js"></script>
 </body>
 </html>
