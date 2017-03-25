@@ -1,0 +1,65 @@
+        <section id="search" role="region" aria-labelledby="search">
+          <header>
+            <h2 property="alternativeHeadline">Search the latest items...</h2>
+          </header>
+          <form id="searchForm" role="search" action="https://search.yahoo.com/search" method="get">
+            <label class="hidden" for="q">Search:</label>
+            <input type="search" id="q" name="q" autofocus placeholder="Search..."/>
+            <input type="submit" value="find"/>
+          </form>
+          <div id="results"></div>
+          <script type="text/javascript">
+            function query(term) {
+	      const query = `select * from feed where url="${feedUrl}" AND title like "%${encodeURIComponent(term)}%" OR url="${feedUrl}" AND description LIKE "%${encodeURIComponent(term)}%" | unique(field="link")`;
+
+              // start the URL by defining the API endpoint and encoding the query
+              const apiendpoint = 'https://query.yahooapis.com/v1/public/yql?q=';
+              let url = apiendpoint + encodeURIComponent(query);
+
+              // diagnostics - remove if you don't need them
+              url += '&diagnostics=true';
+
+              // format (json or xml)
+              url += '&format=json';
+
+              // callback function (when format is json this triggers JSON-P-X output)
+              url += '&callback=searchFeed';
+
+              // environment. this gives you access to the community tables
+              url += '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
+
+              const s = document.createElement('script');
+              s.setAttribute('src', url);
+              document.getElementsByTagName('head')[0].appendChild(s);
+            }
+            function searchFeed(o) {
+              if (o.query && o.query.results && o.query.results.item) {
+                const res = o.query.results.item;
+                let out = '<ol>';
+                let i = 0;
+                let entry = '';
+                for (i=0, j=res.length; i<j; i++) {
+                  entry = res[i];
+		  out += `<li><h2><a href="${entry.link}">${entry.title}</a></h2><p>${entry.description}</p></li>`;
+                }
+                out += '</ol>';
+                out += '<p><a href="#search">&#10010; new search</a><p>';
+                output.innerHTML = out;
+              } else {
+                output.innerHTML = '<p class="error">No search results. &#9785;</p><p><a href="#search">&#10010; Try another search</a>.</p>';
+              }
+            };
+
+            var output = document.createElement('div');
+            output.setAttribute('id','yqldata');
+            document.getElementById('results').appendChild(output);
+
+            const f = document.getElementsByTagName('form')[0];
+            f.onsubmit = () => {
+              output.innerHTML = 'Loading&hellip;';
+              const searchTerm = document.getElementById('q').value;
+                query(searchTerm);
+                return false;
+            };
+          </script>
+        </section>
