@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" vocab="http://schema.org/" typeof="CreativeWork">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Mobile Feed App</title>
+<meta name="description" content="A single page app using HTML5 markup, CSS3, & Javascript APIs to create a mobile feed search/display as a teaching tool for HTML5 courses."/>
+<meta name="author" content="Jason A. Clark"/>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="http://www.jasonclark.info" />
+<meta name="twitter:creator" content="@jaclark" />
+<meta property="og:url" content="http://www.lib.montana.edu/~jason/files/html5-mobile-feed/" />
+<meta property="og:title" content="HTML5 Mobile Feed App" />
+<meta property="og:description" content="A single page app using HTML5 markup, CSS3, & Javascript APIs to create a mobile feed search/display as a teaching tool for HTML5 courses."/>
+<meta property="og:image" content="http://www.lib.montana.edu/~jason/meta/img/clark-share-default.png" />
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="./meta/img/manifest.png"/>
+<link href="http://www.lib.montana.edu/~jason/files/html5-mobile-feed/" hreflang="en-us" rel="alternate"/>
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="./meta/styles/master.css"/>
+<style>
+/* view visibility logic and animation */
+/*
+main > * {
+ display: none;
+}
+main > *:last-child {
+ display: block;
+}
+@keyframes pulse {
+  0% { transform: scale(1) }
+  50% { transform: scale(1.05) }
+  100% { transform: scale(1) }
+}
+main > *:target {
+  display: block;
+  animation: pulse 0.5s linear 1;
+}
+main > *:target ~ * {
+  display: none;
+}
+*/	
+</style>
+<script>
+// set global variables for feed and URL values	
+if (typeof window.localStorage === 'undefined' && window.localStorage === null) {
+  var feedUrl = 'https://gdata.youtube.com/feeds/api/users/msulibrary/uploads?alt=rss';
+  var siteUrl = 'http://www.lib.montana.edu';
+} else if (localStorage.getItem("feedUri") === null) {
+  var feedUrl = null;
+  var siteUrl = null;
+} else {
+  var feedUrl = window.localStorage.getItem("feedUri");
+  var siteUrl = window.localStorage.getItem("siteUri");
+}
+</script>
+</head>
+<body role="document" typeof="WebPage">
+  <div id="doc">
+    <header role="banner" property="name description">
+      <h1>Mobile Feed App</h1>
+    </header>
+    <nav role="navigation">
+      <ul id="nav" property="breadcrumb" role="tablist">
+        <li role="tab" aria-controls="main"><a href="views/home.html">Home</a></li>
+        <li role="tab" aria-controls="main"><a href="views/search.html">Search</a></li>
+        <li role="tab" aria-controls="main"><a href="views/browse.html">Browse</a></li>
+        <li role="tab" aria-controls="main"><a class="settings-icon" href="views/set.html">Set</a></li>
+      </ul>
+    </nav>
+    <aside role="complementary">
+      <figure>
+        <img property="primaryImageOfPage" alt="statue of a reader" src="./meta/img/reader.jpg">
+        <figcaption>statue of a reader</figcaption>
+      </figure>
+    </aside>
+    <div id="main" role="tabpanel">
+      <main property="mainContentOfPage" role="main">
+      </main>
+    </div><!-- end #main -->
+    <aside role="complementary">
+      <header>
+        <h2>Related Items</h2>
+      </header>
+      <ul id="links">
+        <li><a property="significantLink" href="http://www.lib.montana.edu" rel="external">Full library web site</a></li>
+        <li><a property="relatedLink" href="http://www.lib.montana.edu/hours/" rel="external">Library hours</a></li>
+      </ul>
+    </aside>
+    <footer role="contentinfo">
+      <p>demo by <a property="accountablePerson author creator publisher" href="http://twitter.com/jaclark">@jaclark</a> | <a property="relatedLink" href="https://github.com/jasonclark/html5-mobile-feed">get code</a> | &copy; <span property="publisher sourceOrganization">MSU Library</span></p>
+    </footer>
+  </div><!-- end #doc -->
+  <script defer src="app.js"></script>
+</body>
+</html>
