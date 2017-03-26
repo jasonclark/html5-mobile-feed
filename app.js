@@ -5,12 +5,13 @@
 
   convertLinks();
 
-  // converts all links to be handled by JS
+  // converts navigation links to be handled by JS
   function convertLinks(documentRoot) {
     if (!documentRoot) documentRoot = document;
 
-    // get all links
-    const links = documentRoot.querySelectorAll("a");
+    // get all navigation links
+    const links = documentRoot.querySelectorAll("header nav ul li a");
+    //const links = documentRoot.querySelectorAll("a");
 
     // hack to convert the NodeList to an Array... JavaScript :(
     Array.prototype.slice.call(links)
@@ -47,22 +48,11 @@
     loadPage(href);
   }
 
-  const menuLinks = document.querySelectorAll("header nav a");
-
   // loads the page from href and replaces the #main content with it.
   function loadPage(href) {
     console.log(`Loading page ${href}`);
 
     mainElement.setAttribute("aria-busy", "true");
-
-    for (const link of menuLinks) {
-      if (link.getAttribute("href") == href) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
-    }
-
 
     // firing off a standard AJAX request
     const xmlhttp = new XMLHttpRequest();
